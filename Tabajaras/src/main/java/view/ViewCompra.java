@@ -4,6 +4,7 @@ import controller.GerenciadorProduto;
 import java.text.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Cliente;
 import model.Compra;
 import model.Produto;
@@ -14,6 +15,7 @@ public class ViewCompra extends javax.swing.JPanel {
     private ArrayList<Produto> produtos = new ArrayList<>();
     private ArrayList<Compra> compra = new ArrayList<>();
     private GerenciadorProduto genproduto = new GerenciadorProduto();
+    DefaultTableModel modelo = new DefaultTableModel();
     private double total = 0;
     
     Locale locale = new Locale("pt", "BR");
@@ -30,7 +32,21 @@ public class ViewCompra extends javax.swing.JPanel {
         nomecli.setText(cliente.getNome());
         credcli.setText(String.valueOf(cliente.getLimiteDeCredito()));
         totalcompra.setText(nf.format(total));
-        table.set
+        
+        
+        for(int i = 1; i<60; i++){
+            ln.add(new Linha(String.valueOf(i),String.valueOf(i+1),String.valueOf(i+2)));
+        }
+        modelo.addColumn("Id");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Telefone");
+        
+         modelo.addRow(new Object[]{ln.get(ind).getLinha1(),
+        ln.get(ind).getLinha2(),
+        ln.get(ind).getLinha3()});
+        ind++;
+        jTable1.setModel(modelo);
+        
     }
 
     @SuppressWarnings("unchecked")
