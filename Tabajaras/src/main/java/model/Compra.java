@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,6 +26,11 @@ public Compra(ArrayList<Produto> prod, double total, LocalDate data, int codComp
 	this.total = total;
 	this.data = data;
 	this.codCompra = codCompra;
+}
+
+public Compra(){
+    this.produtos = new ArrayList<>();
+    this.data = LocalDate.now();
 }
 
 public int getCodCompra() {
