@@ -16,7 +16,7 @@ import model.Produto;
 
 public class ViewCompra extends javax.swing.JFrame {
 
-     private Cliente cliente;
+    
     private ArrayList<Produto> produtos = new ArrayList<>();
     private Compra compra;
     private GerenciadorProduto genproduto = new GerenciadorProduto();
@@ -27,15 +27,14 @@ public class ViewCompra extends javax.swing.JFrame {
     Locale locale = new Locale("pt", "BR");
     NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
      
-    public ViewCompra(Cliente cli, Compra comp) {
+    public ViewCompra(Compra comp) {
         initComponents();
-        this.cliente = cli;
+        
         this.compra = comp;
         
-        System.out.println(cliente.getNome());
         
-        nomecli.setText(cliente.getNome());
-        credcli.setText(String.valueOf(cliente.getLimiteDeCredito()));
+        
+        
         totalcompra.setText(nf.format(total));
         
         
@@ -57,13 +56,9 @@ public class ViewCompra extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         totalcompra = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        credcli = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         JCodigo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        nomecli = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
@@ -75,12 +70,6 @@ public class ViewCompra extends javax.swing.JFrame {
         totalcompra.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         totalcompra.setText("Valor");
 
-        jLabel6.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel6.setText("Credito:");
-
-        credcli.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        credcli.setText("Valor");
-
         jToggleButton1.setText("ADD");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,12 +78,6 @@ public class ViewCompra extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Código Produto:");
-
-        jLabel2.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel2.setText("Cliente:");
-
-        nomecli.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        nomecli.setText("Nome_Cliente");
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,16 +100,7 @@ public class ViewCompra extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomecli))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(credcli))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -148,17 +122,7 @@ public class ViewCompra extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6))
-                    .addComponent(nomecli)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(credcli)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(JCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,6 +151,7 @@ public class ViewCompra extends javax.swing.JFrame {
             quantidade++;
 
             modelo.addRow(new Object[]{String.valueOf(quantidade),
+                p.getCodigoDeBarras(),
                 p.getNome(),
                 nf.format(p.getPreco())});
 
@@ -198,52 +163,13 @@ public class ViewCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewCompra().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JCodigo;
-    private javax.swing.JLabel credcli;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JLabel nomecli;
     private javax.swing.JTable table;
     private javax.swing.JLabel totalcompra;
     // End of variables declaration//GEN-END:variables

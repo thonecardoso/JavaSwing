@@ -2,7 +2,6 @@ package dao;
 
 
 import dao.SingletonCon;
-import dao.SingletonCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,21 +16,22 @@ public class DAOCompra {
 
 	private ResultSet rs;
 	private PreparedStatement stmt;
-	private Connection conexao;
+	private Connection conexao = null;
 
 	private DAOItensCompra it;
 	private DateTimeFormatter format;
 
-	public DAOCompra() {
+	public DAOCompra(){
 		it= new DAOItensCompra();
 		format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		conexao=SingletonCon.getConexao();
 	}
 
 	public ArrayList<Compra> relatorioCompra(int codConta) {
 
 		ArrayList <Compra> compras = new ArrayList<>();
 		try {
+                        conexao=SingletonCon.getConexao();
+                        
 			String SQL = "SELECT * FROM compra WHERE id_conta=?";
 			stmt=conexao.prepareStatement(SQL);
 			stmt.setInt(1, codConta);
@@ -77,6 +77,7 @@ public class DAOCompra {
 		for(int i=0;i<compras.size();i++) {
 
 			try {
+                                conexao=SingletonCon.getConexao();
 				String SQL = "INSERT INTO compra (id_compra, total, data_compra, id_conta) VALUES (?,?,?,?)";
 				stmt=conexao.prepareStatement(SQL);
 				stmt.setInt(1, compras.get(i).getCodCompra());
@@ -104,6 +105,7 @@ public class DAOCompra {
 		for(int i=0; i<compras.size();i++) {
 
 			try {
+                                conexao=SingletonCon.getConexao();
 				String SQL = "UPDATE compra SET total=? ,data_compra=? WHERE id_conta=?, id_compra=?";
 				stmt=conexao.prepareStatement(SQL);	
 				stmt.setDouble(1, compras.get(i).getTotal());
@@ -132,6 +134,7 @@ public class DAOCompra {
 		for(int i=0; i<compras.size(); i++) {
 
 			try {
+                                conexao=SingletonCon.getConexao();
 				stmt=conexao.prepareStatement(SQL);
 				stmt.setInt(1, compras.get(i).getCodCompra());
 				stmt.execute();
@@ -147,6 +150,7 @@ public class DAOCompra {
 		String SQL = "SELECT * FROM compra WHERE id_conta=?, id_compra=?";
 		Compra comprar=null;
 		try {
+                        conexao=SingletonCon.getConexao();
 
 			stmt=conexao.prepareStatement(SQL);
 			stmt.setInt(1, id_conta);

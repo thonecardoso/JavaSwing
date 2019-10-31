@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class Conta {
     
-    private ArrayList<Compra> compras;
+        private ArrayList<Compra> compras;
 	private LocalDate dataVencimento;
 	private double total;
 	private Cliente cliente;
-    private int id;
+        private int id;
 	
 	public Conta(ArrayList<Compra> compras, LocalDate dataVencimento, double total, Cliente cli, int id) {
 		super();

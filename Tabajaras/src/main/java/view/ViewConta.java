@@ -28,8 +28,7 @@ public class ViewConta extends javax.swing.JFrame {
         initComponents();
         this.clientes = dc.buscarClientes();
         this.produtos = dp.relatorioProduto();
-        cli = clientes.get(0);
-        System.out.println(cli.getNome());
+        
         c = new Compra();
         
         
@@ -39,19 +38,10 @@ public class ViewConta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        frame = new javax.swing.JFrame();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         btnCompra = new javax.swing.JButton();
-
-        javax.swing.GroupLayout frameLayout = new javax.swing.GroupLayout(frame.getContentPane());
-        frame.getContentPane().setLayout(frameLayout);
-        frameLayout.setHorizontalGroup(
-            frameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        frameLayout.setVerticalGroup(
-            frameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +49,15 @@ public class ViewConta extends javax.swing.JFrame {
         btnCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCompraActionPerformed(evt);
+            }
+        });
+
+        jRadioButton1.setText("Física");
+
+        jRadioButton2.setText("jRadioButton2");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
             }
         });
 
@@ -70,11 +69,21 @@ public class ViewConta extends javax.swing.JFrame {
                 .addContainerGap(302, Short.MAX_VALUE)
                 .addComponent(btnCompra)
                 .addGap(115, 115, 115))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(jRadioButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(btnCompra)
                 .addGap(74, 74, 74))
         );
@@ -83,7 +92,7 @@ public class ViewConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
-        vc = new ViewCompra(cli,c);
+        vc = new ViewCompra(c);
         
         //vc.setCliente(cli);
         vc.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,6 +100,10 @@ public class ViewConta extends javax.swing.JFrame {
         vc.setVisible(true);
         //JOptionPane.showMessageDialog(null, "asdflkj");
     }//GEN-LAST:event_btnCompraActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -124,6 +137,8 @@ public class ViewConta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompra;
-    private javax.swing.JFrame frame;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     // End of variables declaration//GEN-END:variables
 }
