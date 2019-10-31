@@ -30,7 +30,7 @@ public class Conta {
 	}
 
 	public Conta() {
-	
+            this.compras = new ArrayList<>();
 	}
 	
 	public ArrayList<Compra> getCompras() {

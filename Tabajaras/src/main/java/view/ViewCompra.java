@@ -7,6 +7,7 @@ package view;
 
 import controller.GerenciadorProduto;
 import java.text.*;
+import java.time.LocalDate;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,16 +19,16 @@ public class ViewCompra extends javax.swing.JFrame {
 
     
     private ArrayList<Produto> produtos = new ArrayList<>();
-    private Compra compra;
+    private ArrayList<Compra>  compra;
     private GerenciadorProduto genproduto = new GerenciadorProduto();
     DefaultTableModel modelo = new DefaultTableModel();
     private double total = 0;
     int quantidade = 0;
-    
+    Compra con = new Compra();
     Locale locale = new Locale("pt", "BR");
     NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
      
-    public ViewCompra(Compra comp) {
+    public ViewCompra(ArrayList<Compra> comp) {
         initComponents();
         
         this.compra = comp;
@@ -61,6 +62,7 @@ public class ViewCompra extends javax.swing.JFrame {
         JCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +94,13 @@ public class ViewCompra extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table);
 
+        jButton1.setText("Finalizar Compra");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,20 +113,20 @@ public class ViewCompra extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(106, 106, 106)
-                                .addComponent(totalcompra)
-                                .addGap(43, 43, 43))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jToggleButton1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(JCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(33, 33, 33))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jToggleButton1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(JCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(106, 106, 106)
+                        .addComponent(totalcompra)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,8 +145,9 @@ public class ViewCompra extends javax.swing.JFrame {
                         .addGap(231, 231, 231)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(totalcompra)
-                            .addComponent(jLabel4))))
-                .addGap(29, 29, 29))
+                            .addComponent(jLabel4)
+                            .addComponent(jButton1))))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -159,13 +169,22 @@ public class ViewCompra extends javax.swing.JFrame {
 
         total = total + p.getPreco();
         totalcompra.setText(nf.format(total));
-        compra.getProd().add(p);
+        
+        con.getProd().add(p);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        con.setTotal(total);
+        con.setData(LocalDate.now());
+        compra.add(con);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JCodigo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
