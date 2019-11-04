@@ -129,6 +129,7 @@ public class DAOProduto {
                 String tipouva;
                 String pais;
                 String tipovinho;
+               
 
                 nome = rs.getString("nome");
                 preco = rs.getDouble("preco");
@@ -136,12 +137,35 @@ public class DAOProduto {
                 tipouva = rs.getString("tipo_de_uva");
                 pais = rs.getString("pais_de_origem");
                 tipovinho = rs.getString("tipo_de_vinho");
+                int id = rs.getInt("id_produto");
 
                 pro = new Produto(nome, preco, codBarra, tipouva, pais, tipovinho);
+                pro.setId_produto(id);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o produto: " + e.getMessage());
         }
         return pro;
+    }
+    
+    public int getId(String cod) {
+
+        String SQL = "SELECT id_produto FROM produto WHERE cod_barras=?";
+        Produto pro = new Produto();
+        try {
+
+            conexao = SingletonCon.getConexao();
+            stmt = conexao.prepareStatement(SQL);
+            stmt.setString(1, cod);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                 return rs.getInt(1);
+              
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar id: " + e.getMessage());
+        }
+        return -1;
     }
 }

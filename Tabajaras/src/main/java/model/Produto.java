@@ -8,6 +8,7 @@ public class Produto {
     private String tipoDeUva;
     private String paisDeOrigem;
     private String tipoDeVinho;
+    private int id_produto;
 
     public Produto(String nome, double preco, String codigoDeBarras, String tipoDeUva, String paisDeOrigem, String tipoDeVinho) {
         this.nome = nome;
@@ -69,4 +70,14 @@ public class Produto {
     public void setTipoDeVinho(String tipoDeVinho) {
         this.tipoDeVinho = tipoDeVinho;
     }
+
+    public int getId_produto() {
+        return id_produto;
+    }
+
+    public void setId_produto(int id_produto) {
+        this.id_produto = id_produto;
+    }
+    
+    
 }

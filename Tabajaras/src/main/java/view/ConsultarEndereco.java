@@ -279,6 +279,7 @@ public class ConsultarEndereco extends javax.swing.JFrame {
     
     
     public void carregacomp(int i){
+        
         Endereco e = endereco.get(i);
         bairro.setText(e.getBairro());
         complemento.setText(e.getComplemento());

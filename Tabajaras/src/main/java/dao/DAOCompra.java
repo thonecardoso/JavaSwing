@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 import model.Compra;
 import model.Produto;
@@ -27,6 +28,8 @@ public class DAOCompra {
 	}
 
 	public ArrayList<Compra> relatorioCompra(int codConta) {
+            
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 		ArrayList <Compra> compras = new ArrayList<>();
 		try {
@@ -45,12 +48,13 @@ public class DAOCompra {
 				ArrayList <Produto> prod;
 
 				total=rs.getDouble("total");
-				dataBanco=rs.getString("data_compra");
+				//dataBanco=rs.getString("data_compra");
+                                dataBanco=rs.getObject("data_compra").toString();
 				codCompra=rs.getInt("id_compra");
 
 				prod=it.relatorioItensCompra(codCompra);
 
-				dataReal=LocalDate.parse(dataBanco, format);
+				dataReal=LocalDate.parse(dataBanco, formater);
 
 				Compra comprar = new Compra(prod, total, dataReal, codCompra);
 				compras.add(comprar);
@@ -78,21 +82,24 @@ public class DAOCompra {
 
 			try {
                                 conexao=SingletonCon.getConexao();
-				String SQL = "INSERT INTO compra (id_compra, total, data_compra, id_conta) VALUES (?,?,?,?)";
+				String SQL = "INSERT INTO compra (total, data_compra, id_conta) VALUES (?,TO_DATE(?, 'DD/MM/YYYY'),?)";
 				stmt=conexao.prepareStatement(SQL);
-				stmt.setInt(1, compras.get(i).getCodCompra());
-				stmt.setDouble(2, compras.get(i).getTotal());
-				stmt.setString(3, compras.get(i).getData().format(format));
-				stmt.setInt(4, codConta);
+				//stmt.setInt(1, compras.get(i).getCodCompra());
+				stmt.setDouble(1, compras.get(i).getTotal());
+				stmt.setString(2, compras.get(i).getData().format(format));
+				stmt.setInt(3, codConta);
 				stmt.execute();	
 				stmt.close();
-				it.cadastroItensCompra(compras.get(i));
+                                
+                                it.cadastroItensCompra(compras.get(i),this.getId());
 			}
 			catch(Exception e) {
 				System.out.println("Erro ao tentar inserir a compra: "+e.getMessage());
 			}
+			
 
 		}
+                
 
 	}
 
@@ -182,5 +189,29 @@ public class DAOCompra {
 			System.out.println("Erro ao buscar a compra: "+e.getMessage());
 		}
 		return comprar;
+	}
+        
+        public int getId() {
+		
+		String SQL = "SELECT MAX(id_compra) AS id FROM compra;";
+		int id = -1;
+		try {
+                        conexao=SingletonCon.getConexao();
+			stmt=conexao.prepareStatement(SQL);
+			
+			rs=stmt.executeQuery();
+			
+			if(rs.next()){
+                            id=rs.getInt(1);
+                        }
+			
+			
+		}
+		catch(Exception ex) {
+			System.out.println("Erro ao pegar Id compra"+ex.getMessage());
+		}
+                
+                return id;
+		
 	}
 }

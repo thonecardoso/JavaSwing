@@ -370,7 +370,173 @@ import javax.swing.JOptionPane;
 			return pj;
 
 		}
+                
+                public ArrayList<Cliente> ArrayClientes() {
+                    
+                        int cod, tipo;
+                        String nome, cpf, cnpj, nome_fantasia;
+                        double credito;
+                        
+                        ArrayList<Cliente> clientes = new ArrayList<>();
+			ResultSet rs;
 
+			String sql = "SELECT cod, nome, credito, tipo, cpf, cnpj, nome_fantasia\n" +
+                                     "FROM public.clientes;";
+                        try {
+
+				conexao=SingletonCon.getConexao();
+				stmt = conexao.prepareStatement(sql);
+				rs = stmt.executeQuery();
+                                int i=1;
+				while (rs.next()) {
+                                    
+                                    cod=rs.getInt("cod");
+                                    nome=rs.getString("nome");
+                                    credito=rs.getDouble("credito");
+                                    tipo=rs.getInt("tipo");                                    
+                                    cpf=rs.getString("cpf");
+                                    cnpj=rs.getString("cnpj");
+                                    nome_fantasia=rs.getString("nome_fantasia");
+                                    
+                                    if(tipo==1){
+                                        PessoaFisica pf = new PessoaFisica();
+                                        pf.setCpf(cpf);
+                                        pf.setEndereco(buscarEnd(cod));                                        
+                                        pf.setId(cod);
+                                        pf.setTipo(tipo);
+                                        pf.setNome(nome);
+                                        pf.setLimiteDeCredito(credito);
+                                        pf.setIdFisica(cod);
+                                        
+                                        clientes.add(pf);
+                                        
+                                    }else if(tipo==2){
+                                        PessoaJuridica pj = new PessoaJuridica();
+                                        pj.setCnpj(cnpj);
+                                        pj.setEndereco(buscarEnd(cod));
+                                        pj.setId(cod);                                        
+                                        pj.setTipo(tipo);
+                                        pj.setNome(nome);
+                                        pj.setLimiteDeCredito(credito);
+                                        pj.setIdJuridica(cod);
+                                        pj.setNomeFantasia(nome_fantasia);
+                                        
+                                        clientes.add(pj);
+                                    }
+                                }
+                        } catch (Exception e) {
+
+				JOptionPane.showMessageDialog(null, "Erro ao buscar clientes" + e.getMessage());
+
+			}
+
+			return clientes;
+                                
+                }
+
+                public PessoaFisica ClienteFisico(String chave) {
+                    
+                        int cod, tipo;
+                        String nome, cpf, cnpj, nome_fantasia;
+                        double credito;
+                        
+                        
+			ResultSet rs;
+                        PessoaFisica pf = null;
+
+			String sql = "SELECT cod, nome, credito, tipo, cpf, cnpj, nome_fantasia\n" +
+                                     "FROM public.clientes where cpf=?;";
+                        try {
+
+				conexao=SingletonCon.getConexao();
+				stmt = conexao.prepareStatement(sql);
+                                stmt.setString(1, chave);
+				rs = stmt.executeQuery();
+                                
+                                if(rs.next()){
+                                    
+                                    cod=rs.getInt("cod");
+                                    nome=rs.getString("nome");
+                                    credito=rs.getDouble("credito");
+                                    tipo=rs.getInt("tipo");                                    
+                                    cpf=rs.getString("cpf");
+                                    cnpj=rs.getString("cnpj");
+                                    nome_fantasia=rs.getString("nome_fantasia");
+                                    
+                                    pf = new PessoaFisica();
+                                    
+                                    pf.setCpf(cpf);
+                                    pf.setEndereco(buscarEnd(cod));
+                                    pf.setId(cod);
+                                    pf.setTipo(tipo);
+                                    pf.setNome(nome);
+                                    pf.setLimiteDeCredito(credito);
+                                    pf.setIdFisica(cod);
+
+                                   
+                                }
+                        } catch (Exception e) {
+
+				JOptionPane.showMessageDialog(null, "Erro ao buscar clientes" + e.getMessage());
+
+			}
+
+			return pf;
+                                
+                }
+                
+                public PessoaJuridica ClienteJuridico(String chave) {
+                    
+                        int cod, tipo;
+                        String nome, cpf, cnpj, nome_fantasia;
+                        double credito;
+                        
+                        
+			ResultSet rs;
+                        PessoaJuridica pj = null;
+
+			String sql = "SELECT cod, nome, credito, tipo, cpf, cnpj, nome_fantasia\n" +
+                                     "FROM public.clientes where cnpj=?;";
+                        try {
+
+				conexao=SingletonCon.getConexao();
+				stmt = conexao.prepareStatement(sql);
+                                stmt.setString(1, chave);
+				rs = stmt.executeQuery();
+                                
+                                if(rs.next()){
+                                    cod=rs.getInt("cod");
+                                    nome=rs.getString("nome");
+                                    credito=rs.getDouble("credito");
+                                    tipo=rs.getInt("tipo");                                    
+                                    cpf=rs.getString("cpf");
+                                    cnpj=rs.getString("cnpj");
+                                    nome_fantasia=rs.getString("nome_fantasia");
+                                    
+                                    pj = new PessoaJuridica();
+                                    
+                                    pj.setCnpj(cnpj);
+                                    pj.setEndereco(buscarEnd(cod));
+                                    pj.setId(cod);                                        
+                                    pj.setTipo(tipo);
+                                    pj.setNome(nome);
+                                    pj.setLimiteDeCredito(credito);
+                                    pj.setIdJuridica(cod);
+                                    pj.setNomeFantasia(nome_fantasia);
+                                        
+                                       
+                                }
+                                    
+                        } catch (Exception e) {
+
+				JOptionPane.showMessageDialog(null, "Erro ao buscar clientes" + e.getMessage());
+
+			}
+
+			return pj;
+                                
+                }
+                
 		public ArrayList<Cliente> buscarClientes() {
 
 			ArrayList<Cliente> clientes = new ArrayList<>();

@@ -15,14 +15,15 @@ public class ConsultarCliente extends javax.swing.JFrame {
     int posicao;
     ConsultarEndereco consultaEndereco;
     int tipo=0;
+    int id = 0;
     public ConsultarCliente() {
         initComponents();
         gerenciadorCliente = new GerenciadorCliente();
         consultaEndereco = new ConsultarEndereco();
         clienteDAO = new DAOCliente();
         posicao = -1;
-        cliente = new ArrayList<>();
-        cliente=clienteDAO.buscarClientes();
+        cliente = clienteDAO.ArrayClientes();
+        //cliente.addAll(clienteDAO.ArrayClientes());
         
         
         
@@ -210,6 +211,8 @@ public class ConsultarCliente extends javax.swing.JFrame {
         if(posicao>-1)
         consultaEndereco.carregacomp(0);
         consultaEndereco.setVisible(true);
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
@@ -221,35 +224,34 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarActionPerformed
 
     private void buscar(){
-         String chave = busc.getText().trim();
+        String chave = busc.getText().trim();
         
+        boolean cond = true;
         
-        int i=0;
-        for(i=0;i<cliente.size();i++){
-            
-            if(cliente.get(i) instanceof PessoaFisica){
-                
-                PessoaFisica pf = (PessoaFisica)cliente.get(i);
-                
-                if(chave.equals(pf.getCpf())){
-                    posicao = i;
-                    
-                    CarregarComponentes(posicao);
-                    break;
-                }
-                
+        if(tipo==1){
+            PessoaFisica pf = clienteDAO.ClienteFisico(chave); 
+            consultaEndereco.setEndereco(pf.getEndereco());
+            if(pf==null){
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
             }else{
-                
-                PessoaJuridica pj = (PessoaJuridica)cliente.get(i);
-                
-                if(chave.equals(pj.getCnpj())){
-                
-                    posicao = i;
-                    CarregarComponentes(posicao);
-                    break;
-                }
+                nome.setText(pf.getNome());
+                limite.setText(String.valueOf(pf.getLimiteDeCredito()));
+                cpf.setText(pf.getCpf());
+                nomefantasia.setText("");
+                id = pf.getId();
             }
-           
+        }else if(tipo==2){
+            PessoaJuridica pj = clienteDAO.ClienteJuridico(chave); 
+            consultaEndereco.setEndereco(pj.getEndereco());
+            if(pj==null){
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            }else{
+                nome.setText(pj.getNome());
+                limite.setText(String.valueOf(pj.getLimiteDeCredito()));
+                cpf.setText(pj.getCnpj());
+                nomefantasia.setText(pj.getNomeFantasia());
+                id = pj.getId();
+            }
         }
     }
     private void r1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1ActionPerformed
@@ -281,30 +283,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_r2ActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        String cnpj = busc.getText().trim();
-        int j = JOptionPane.showConfirmDialog(null, "Confirma Exclusão?");
+        //String cnpj = busc.getText().trim();
+        int j = JOptionPane.showConfirmDialog(null, "1Confirma Exclusão?");
                 if(j==0){
                 int chave = 0;
                     if(tipo==2){
-                        chave=clienteDAO.idjur(cnpj);
-                        for(int i=0;i<cliente.size();i++){
-                            if(cliente.get(i).getId()==chave){
-                                cliente.remove(i);
-                                break;
-                            }
-                                
-                        }
-                        
-                        clienteDAO.excluirCli(chave);
-                        
+                        clienteDAO.excluirCli(id);
                         limpacomponentes();
-                        
-                        
                     }
                     else{
-                        chave = cliente.get(posicao).getId();
-                        cliente.remove(posicao);
-                        clienteDAO.excluirCli(chave);
+                        clienteDAO.excluirCli(id);
                         limpacomponentes();
                     }
                     JOptionPane.showMessageDialog(null, "Cliente Excluido!");
@@ -313,15 +301,15 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
         
-        String cnpj = busc.getText().trim();
-        int j = JOptionPane.showConfirmDialog(null, "Confirma Alterações?");
+        String chave = busc.getText().trim();
+        int j = JOptionPane.showConfirmDialog(null, "2Confirma Alterações?");
                 if(j==0){
-                int chave = 0;
+                
                     if(r2.isSelected()){
-                        chave=clienteDAO.idjur(cnpj);
                         
-                        PessoaJuridica pj = new PessoaJuridica();
-                        pj.setIdJuridica(chave);
+                        
+                        PessoaJuridica pj = clienteDAO.ClienteJuridico(chave);
+                        pj.setIdJuridica(id);
                         pj.setNome(nome.getText().trim());
                         pj.setTipo(tipo);
                         pj.setLimiteDeCredito(Double.parseDouble(limite.getText().trim()));
@@ -334,7 +322,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                         
                     }
                     else{
-                        PessoaFisica pf = (PessoaFisica)cliente.get(posicao);
+                        PessoaFisica pf = clienteDAO.ClienteFisico(chave);
                         pf.setNome(nome.getText().trim());
                         pf.setTipo(tipo);
                         pf.setLimiteDeCredito(Double.parseDouble(limite.getText().trim()));
@@ -381,7 +369,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
             limite.setText("");
             cpf.setText("");
             nomefantasia.setText("");
-            cliente=clienteDAO.buscarClientes();
+            //cliente=clienteDAO.buscarClientes();
     }
     
     public static void main(String args[]) {

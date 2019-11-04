@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         desktop = new javax.swing.JDesktopPane();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         produtoCadastrar = new javax.swing.JMenuItem();
@@ -42,6 +43,9 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jInternalFrame1.setVisible(true);
 
@@ -58,15 +62,25 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButton1.setText("jButton1");
+
+        desktop.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
+            .addGroup(desktopLayout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(jButton1)
+                .addContainerGap(473, Short.MAX_VALUE))
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGroup(desktopLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jButton1)
+                .addContainerGap(312, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Produto");
@@ -140,6 +154,26 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Conta/Compra");
+
+        jMenuItem3.setText("Cadastrar/Consultar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem5.setText("Relatório");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -282,6 +316,36 @@ public class Principal extends javax.swing.JFrame {
         desktop.add(internoconsult);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        JInternalFrame[] frames = desktop.getAllFrames();
+        for(JInternalFrame f : frames) {
+            f.dispose();
+        }
+        RelatorioConta janelaRelatorioConta = new RelatorioConta();   
+        JInternalFrame internoconsult = new JInternalFrame();
+        internoconsult.setContentPane(janelaRelatorioConta.getContentPane());
+        internoconsult.setMaximizable(true);
+        internoconsult.setClosable(true);
+        internoconsult.pack();
+        internoconsult.setVisible(true);
+        desktop.add(internoconsult);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        JInternalFrame[] frames = desktop.getAllFrames();
+        for(JInternalFrame f : frames) {
+            f.dispose();
+        }
+        ViewContaP janelaViewContaP = new ViewContaP();   
+        JInternalFrame internoconsult = new JInternalFrame();
+        internoconsult.setContentPane(janelaViewContaP.getContentPane());
+        internoconsult.setMaximizable(true);
+        internoconsult.setClosable(true);
+        internoconsult.pack();
+        internoconsult.setVisible(true);
+        desktop.add(internoconsult);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -320,13 +384,17 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Jexcluirproduto;
     private javax.swing.JDesktopPane desktop;
+    private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem produtoAlterar;
     private javax.swing.JMenuItem produtoCadastrar;
     private javax.swing.JMenuItem produtoConsultar;
