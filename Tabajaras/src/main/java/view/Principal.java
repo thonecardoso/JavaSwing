@@ -31,7 +31,6 @@ public class Principal extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         desktop = new javax.swing.JDesktopPane();
-        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         produtoCadastrar = new javax.swing.JMenuItem();
@@ -62,25 +61,15 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-
-        desktop.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(desktopLayout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(jButton1)
-                .addContainerGap(473, Short.MAX_VALUE))
+            .addGap(0, 736, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(desktopLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jButton1)
-                .addContainerGap(312, Short.MAX_VALUE))
+            .addGap(0, 446, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Produto");
@@ -384,7 +373,6 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Jexcluirproduto;
     private javax.swing.JDesktopPane desktop;
-    private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

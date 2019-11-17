@@ -277,7 +277,7 @@ public class ViewCompra extends javax.swing.JFrame {
             if(JCodigo.getText().equals(i.getCodigoDeBarras())){
                 pro=false;
                 
-                int x=JOptionPane.showConfirmDialog(null, "3confirma cancelamento itém?");
+                int x=JOptionPane.showConfirmDialog(null, "Confirma cancelamento itém?");
                 if(x==0){
                     quantidade++;
                     i.setPreco(i.getPreco()*-1);
@@ -300,7 +300,7 @@ public class ViewCompra extends javax.swing.JFrame {
             }
             
         }
-        if(!pro){
+        if(pro){
             JOptionPane.showMessageDialog(null, "Código não encontrado!");
         }
     }//GEN-LAST:event_CancelarItemActionPerformed

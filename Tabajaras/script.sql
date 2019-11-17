@@ -26,10 +26,10 @@ CREATE TABLE public.compra
 (
     id_compra integer NOT NULL DEFAULT nextval('compra_id_seq'::regclass),
     total double precision,
-    data_compra timestamp without time zone,
+    data_compra date,
     id_conta integer,
     CONSTRAINT compra_pkey PRIMARY KEY (id_compra),
-    CONSTRAINT fk_conta FOREIGN KEY (id_conta)
+    CONSTRAINT fk_comp FOREIGN KEY (id_conta)
         REFERENCES public.conta (id_conta) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -50,7 +50,7 @@ ALTER TABLE public.compra
 CREATE TABLE public.conta
 (
     id_conta integer NOT NULL DEFAULT nextval('conta_id_seq'::regclass),
-    data_vencimento timestamp without time zone,
+    data_vencimento date,
     total double precision,
     id_cli integer,
     CONSTRAINT conta_pkey PRIMARY KEY (id_conta)
@@ -112,6 +112,37 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.fatura
+    OWNER to postgres;
+
+-- Table: public.itens_compra
+
+-- DROP TABLE public.itens_compra;
+
+CREATE TABLE public.itens_compra
+(
+    id_item integer,
+    id_prod integer,
+    id_compra integer,
+    preco double precision,
+    id integer NOT NULL DEFAULT nextval('itens_id_seq'::regclass),
+    cod_barras character varying COLLATE pg_catalog."default",
+    CONSTRAINT itenss_compra_pkey PRIMARY KEY (id),
+    CONSTRAINT fk1 FOREIGN KEY (id_prod)
+        REFERENCES public.produto (id_produto) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT fk2 FOREIGN KEY (id_compra)
+        REFERENCES public.compra (id_compra) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.itens_compra
     OWNER to postgres;
 
 -- Table: public.login
@@ -218,12 +249,7 @@ CREATE TABLE public.produto
     pais_de_origem character varying COLLATE pg_catalog."default",
     tipo_de_vinho character varying COLLATE pg_catalog."default",
     id_compra integer,
-    CONSTRAINT produto_pkey PRIMARY KEY (id_produto),
-    CONSTRAINT fk_compra FOREIGN KEY (id_compra)
-        REFERENCES public.compra (id_compra) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-        NOT VALID
+    CONSTRAINT produto_pkey PRIMARY KEY (id_produto)
 )
 WITH (
     OIDS = FALSE
@@ -232,3 +258,87 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.produto
     OWNER to postgres;
+
+-- View: public.busca_cliente
+
+-- DROP VIEW public.busca_cliente;
+
+CREATE OR REPLACE VIEW public.busca_cliente
+ AS
+ SELECT cliente.id_cliente AS cod,
+    cliente.nome,
+    cliente.limite_de_credito AS credito,
+    cliente.tipo,
+    pessoa_fisica.cpf,
+    pessoa_juridica.cnpj,
+    pessoa_juridica.nome_fantasia
+   FROM cliente
+     JOIN pessoa_fisica ON cliente.id_cliente = pessoa_fisica.id_fisica
+     JOIN pessoa_juridica ON cliente.id_cliente = pessoa_juridica.juridica_cliente;
+
+ALTER TABLE public.busca_cliente
+    OWNER TO postgres;
+
+-- View: public.cli
+
+-- DROP VIEW public.cli;
+
+CREATE OR REPLACE VIEW public.cli
+ AS
+ SELECT cliente.id_cliente AS id,
+    cliente.nome,
+    cliente.limite_de_credito,
+    cliente.tipo
+   FROM cliente;
+
+ALTER TABLE public.cli
+    OWNER TO postgres;
+
+-- View: public.clientes
+
+-- DROP VIEW public.clientes;
+
+CREATE OR REPLACE VIEW public.clientes
+ AS
+ SELECT cli.id AS cod,
+    cli.nome,
+    cli.limite_de_credito AS credito,
+    cli.tipo,
+    juridica.cnpj,
+    juridica.nome_fantasia,
+    fisica.cpf
+   FROM cli
+     LEFT JOIN juridica USING (id)
+     LEFT JOIN fisica USING (id);
+
+ALTER TABLE public.clientes
+    OWNER TO postgres;
+
+-- View: public.fisica
+
+-- DROP VIEW public.fisica;
+
+CREATE OR REPLACE VIEW public.fisica
+ AS
+ SELECT pessoa_fisica.cpf,
+    pessoa_fisica.id_fisica AS id
+   FROM pessoa_fisica;
+
+ALTER TABLE public.fisica
+    OWNER TO postgres;
+
+-- View: public.juridica
+
+-- DROP VIEW public.juridica;
+
+CREATE OR REPLACE VIEW public.juridica
+ AS
+ SELECT pessoa_juridica.cnpj,
+    pessoa_juridica.nome_fantasia,
+    pessoa_juridica.juridica_cliente AS id
+   FROM pessoa_juridica;
+
+ALTER TABLE public.juridica
+    OWNER TO postgres;
+
+

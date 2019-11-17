@@ -1,9 +1,5 @@
 package dao;
 
-import dao.DAOProduto;
-import dao.DAOProduto;
-import dao.SingletonCon;
-import dao.SingletonCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +47,7 @@ public class DAOItensCompra {
 		}
 
 		catch(Exception e) {
-			System.out.println("Erro no relatório: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro no relatório: "+e.getMessage());
 		}
 		try {
 			
@@ -61,7 +57,7 @@ public class DAOItensCompra {
 			return prod;
 		}
 		catch(Exception e) {
-			System.out.println("Erro: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro: "+e.getMessage());
 		}
 		return prod;
 	}
@@ -79,7 +75,7 @@ public class DAOItensCompra {
                     
 
 			try {
-                            System.out.println(id);
+                            
                                 
                                 conexao=SingletonCon.getConexao();
 				String SQL = "INSERT INTO itens_compra (id_item, cod_barras, id_prod, id_compra, preco) VALUES (?,?,?,?,?)";
@@ -96,7 +92,7 @@ public class DAOItensCompra {
 				
 			}
 			catch(Exception e) {
-				System.out.println("Erro ao tentar inserir Itém : "+e.getMessage());
+				JOptionPane.showMessageDialog(null, "Erro ao tentar inserir Itém : "+e.getMessage());
 			}
 		}
 
@@ -118,7 +114,7 @@ public class DAOItensCompra {
 		}
 
 		catch(Exception e) {
-			System.out.println("Erro no relatório: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro no relatório: "+e.getMessage());
 		}
 		try {
 			rs.close();
@@ -127,7 +123,7 @@ public class DAOItensCompra {
 
 		}
 		catch(Exception e) {
-			System.out.println("Erro: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro: "+e.getMessage());
 		}
 	
 		
@@ -146,7 +142,25 @@ public class DAOItensCompra {
 				
 			}
 			catch(Exception ex) {
-				System.out.println("Erro ao excluir o produto: "+ex.getMessage());
+				JOptionPane.showMessageDialog(null, "Erro ao excluir o produto: "+ex.getMessage());
+			}
+	}
+        
+        public void excluirItenCompra(int id, String chave) {
+		String SQL = "delete from itens_compra where id = (select min(id) from itens_compra "
+                            + "where id_compra = ? and cod_barras = ?);";
+
+			try {
+				conexao=SingletonCon.getConexao();
+				stmt=conexao.prepareStatement(SQL);
+				stmt.setInt(1, id);
+                                stmt.setString(2, chave);
+				stmt.execute();
+				stmt.close();
+				
+			}
+			catch(Exception ex) {
+				JOptionPane.showMessageDialog(null, "Erro ao excluir o Itém: "+ex.getMessage());
 			}
 	}
 

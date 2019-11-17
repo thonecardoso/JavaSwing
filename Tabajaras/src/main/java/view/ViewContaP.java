@@ -40,6 +40,7 @@ public class ViewContaP extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         PessoaJuridica = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,9 +59,19 @@ public class ViewContaP extends javax.swing.JFrame {
         });
 
         Busca_ID_CONTA.setText("Buscar");
+        Busca_ID_CONTA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Busca_ID_CONTAActionPerformed(evt);
+            }
+        });
 
         id_conta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         id_conta.setText("ID CONTA");
+        id_conta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                id_contaMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         jLabel1.setText("Busca por ID");
@@ -71,6 +82,11 @@ public class ViewContaP extends javax.swing.JFrame {
         cpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cpf.setText("CPF");
         cpf.setPreferredSize(new java.awt.Dimension(140, 37));
+        cpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cpfMouseClicked(evt);
+            }
+        });
 
         PessoaFisica.setText("Buscar");
         PessoaFisica.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +98,11 @@ public class ViewContaP extends javax.swing.JFrame {
         cnpj.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cnpj.setText("CNPJ");
         cnpj.setPreferredSize(new java.awt.Dimension(140, 37));
+        cnpj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cnpjMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         jLabel3.setText("PessoaJuridica");
@@ -96,55 +117,65 @@ public class ViewContaP extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jLabel4.setText("Buscar Conta Por Cliente");
 
+        jLabel5.setFont(new java.awt.Font("Cantarell", 0, 36)); // NOI18N
+        jLabel5.setText("CONSULTA CONTAS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PessoaFisica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(PessoaJuridica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(id_conta, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                    .addComponent(Busca_ID_CONTA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(8, 8, 8)))
-                .addGap(151, 151, 151))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(PessoaFisica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                            .addComponent(PessoaJuridica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(66, 66, 66)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(id_conta)
+                                    .addComponent(Busca_ID_CONTA, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(8, 8, 8))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel4))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RelatorioConta, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(67, 67, 67)
+                        .addComponent(RelatorioConta, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(RelatorioConta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(209, 209, 209)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel5)
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RelatorioConta, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -155,7 +186,7 @@ public class ViewContaP extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,6 +225,7 @@ public class ViewContaP extends javax.swing.JFrame {
                 rc1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
                 rc1.setVisible(true);
             }
+            cpf.setText("CPF");
     }//GEN-LAST:event_PessoaFisicaActionPerformed
 
     private void PessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PessoaJuridicaActionPerformed
@@ -206,11 +238,12 @@ public class ViewContaP extends javax.swing.JFrame {
                 ArrayList<Conta> contas = contaDAO.ContaFisica(pj.getId());
                 rc1 = new RelatorioConta_1(contas); 
                 
-                System.out.println(pj.getId());
+               
                 rc1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
                 rc1.setVisible(true);
                 
             }
+            cnpj.setText("CNPJ");
     }//GEN-LAST:event_PessoaJuridicaActionPerformed
 
     private void RelatorioContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioContaActionPerformed
@@ -218,6 +251,48 @@ public class ViewContaP extends javax.swing.JFrame {
         rc1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         rc1.setVisible(true);
     }//GEN-LAST:event_RelatorioContaActionPerformed
+
+    private void Busca_ID_CONTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Busca_ID_CONTAActionPerformed
+        
+        int x;
+        try {
+            x = Integer.parseInt(id_conta.getText().trim());
+            ArrayList<Conta> contas1 = contaDAO.getConta(x);
+            ViewContaEdicao vce = new ViewContaEdicao(contaDAO.getConta(x)); 
+
+
+            vce.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+            vce.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        /*int x;
+        try {
+            x = Integer.parseInt(id_conta.getText().trim());
+            //ArrayList<Conta> contas1 = contaDAO.getConta(x);
+            RelatorioConta_1 rc2 = new RelatorioConta_1(contaDAO.getConta(x)); 
+
+
+            rc2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+            rc2.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }*/
+        id_conta.setText("ID CONTA");
+    }//GEN-LAST:event_Busca_ID_CONTAActionPerformed
+
+    private void cpfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cpfMouseClicked
+        cpf.setText("");
+    }//GEN-LAST:event_cpfMouseClicked
+
+    private void cnpjMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cnpjMouseClicked
+        cnpj.setText("");
+    }//GEN-LAST:event_cnpjMouseClicked
+
+    private void id_contaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_id_contaMouseClicked
+        id_conta.setText("");
+    }//GEN-LAST:event_id_contaMouseClicked
 
     
     public static void main(String args[]) {
@@ -266,5 +341,6 @@ public class ViewContaP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

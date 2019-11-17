@@ -19,7 +19,7 @@ public class SingletonCon {
 
 				conexao=DriverManager.getConnection("jdbc:postgresql://localhost:5432/tabajara", prop);
 			}
-                        System.out.println("Conectado...");
+                        
 			return conexao;
                        
 		}

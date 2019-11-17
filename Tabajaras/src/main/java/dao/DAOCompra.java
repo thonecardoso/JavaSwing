@@ -1,7 +1,6 @@
 package dao;
 
 
-import dao.SingletonCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +60,7 @@ public class DAOCompra {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("Erro no relatório compra: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro no relatório compra: "+e.getMessage());
 		}
 
 		try {
@@ -71,7 +70,7 @@ public class DAOCompra {
 
 		}
 		catch(Exception e) {
-			System.out.println("Erro ao fechar o relatório compra: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro ao fechar o relatório compra: "+e.getMessage());
 		}
 		return compras;
 	}
@@ -84,7 +83,6 @@ public class DAOCompra {
                                 conexao=SingletonCon.getConexao();
 				String SQL = "INSERT INTO compra (total, data_compra, id_conta) VALUES (?,TO_DATE(?, 'DD/MM/YYYY'),?)";
 				stmt=conexao.prepareStatement(SQL);
-				//stmt.setInt(1, compras.get(i).getCodCompra());
 				stmt.setDouble(1, compras.get(i).getTotal());
 				stmt.setString(2, compras.get(i).getData().format(format));
 				stmt.setInt(3, codConta);
@@ -94,7 +92,7 @@ public class DAOCompra {
                                 it.cadastroItensCompra(compras.get(i),this.getId());
 			}
 			catch(Exception e) {
-				System.out.println("Erro ao tentar inserir a compra: "+e.getMessage());
+				JOptionPane.showMessageDialog(null, "Erro ao tentar inserir a compra: "+e.getMessage());
 			}
 			
 
@@ -103,55 +101,8 @@ public class DAOCompra {
 
 	}
 
-	public void alterarCompra(ArrayList<Compra> compras, int codConta) {
-
-		for(int i=0; i<compras.size();i++) {
-			it.excluirItensCompra(compras.get(i));
-		}
-
-		for(int i=0; i<compras.size();i++) {
-
-			try {
-                                conexao=SingletonCon.getConexao();
-				String SQL = "UPDATE compra SET total=? ,data_compra=? WHERE id_conta=?, id_compra=?";
-				stmt=conexao.prepareStatement(SQL);	
-				stmt.setDouble(1, compras.get(i).getTotal());
-				stmt.setString(2, compras.get(i).getData().format(format));
-				stmt.setInt(3, codConta);
-				stmt.setInt(4, compras.get(i).getCodCompra());
-				stmt.execute();
-				it.cadastroItensCompra(compras.get(i));
-				stmt.close();
-
-			}
-			catch(Exception e) {
-				System.out.println("Erro ao tentar alterar a compra: "+e.getMessage());
-			}
-
-		}
-
-	}
-
-	public void excluirCompra(ArrayList<Compra> compras) {
-
-		String SQL = "DELETE FROM compra WHERE id_compra=?";
-		for(int i=0; i<compras.size(); i++) 
-			it.excluirItensCompra(compras.get(i));
-		
-		for(int i=0; i<compras.size(); i++) {
-
-			try {
-                                conexao=SingletonCon.getConexao();
-				stmt=conexao.prepareStatement(SQL);
-				stmt.setInt(1, compras.get(i).getCodCompra());
-				stmt.execute();
-			}
-			catch(Exception ex) {
-				System.out.println("Erro ao excluir o produto: "+ex.getMessage());
-			}
-		}
-		
-	}
+	
+	
 
 	public Compra buscarCompra(int id_compra, int id_conta) {
 		String SQL = "SELECT * FROM compra WHERE id_conta=?, id_compra=?";
@@ -186,7 +137,7 @@ public class DAOCompra {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("Erro ao buscar a compra: "+e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro ao buscar a compra: "+e.getMessage());
 		}
 		return comprar;
 	}
@@ -208,7 +159,7 @@ public class DAOCompra {
 			
 		}
 		catch(Exception ex) {
-			System.out.println("Erro ao pegar Id compra"+ex.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro ao pegar Id compra"+ex.getMessage());
 		}
                 
                 return id;
