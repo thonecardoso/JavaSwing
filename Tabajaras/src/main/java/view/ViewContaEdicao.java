@@ -32,7 +32,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
     private NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
     
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+    private DefaultTableModel modelo = null;
     
     Cliente cli;
     Conta conta;
@@ -56,6 +56,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         setCompras();
         setCliente(c.getCli());
         setVencimento(conta.getDataVencimento());
+        nconta.setText(String.valueOf(conta.getId()));
         
         
         
@@ -76,8 +77,8 @@ public class ViewContaEdicao extends javax.swing.JFrame {
     public void setCompras(){
         
        int numeroitem = 1;
-       DefaultTableModel modelo = new DefaultTableModel();
        
+       modelo = new DefaultTableModel();
                
        modelo.addColumn("Nº");
        modelo.addColumn("COD COMPRA");
@@ -99,6 +100,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
        table.setModel(modelo);
        
        valor.setText(nf.format(total));
+       limite1.setText(nf.format(conta.getCli().getLimiteDeCredito()-total));
         
         
     }
@@ -131,6 +133,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         cpf = new javax.swing.JTextField();
         AlterarCliente = new javax.swing.JButton();
         adata = new javax.swing.JTextField();
+        nconta = new javax.swing.JLabel();
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel.getContentPane());
         panel.getContentPane().setLayout(panelLayout);
@@ -186,7 +189,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         jLabel9.setText("COMPRAS");
 
         jLabel10.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel10.setText("RESUMO CONTA");
+        jLabel10.setText("RESUMO CONTA:");
 
         AlterarVencimento.setText("Alterar Vencimento");
         AlterarVencimento.addActionListener(new java.awt.event.ActionListener() {
@@ -245,12 +248,16 @@ public class ViewContaEdicao extends javax.swing.JFrame {
             }
         });
 
+        adata.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         adata.setText("dd/MM/yyyy");
         adata.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 adataMouseClicked(evt);
             }
         });
+
+        nconta.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 24)); // NOI18N
+        nconta.setText("nconta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,7 +278,9 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(265, 265, 265)
-                        .addComponent(jLabel10))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nconta))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +292,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                                 .addGap(1, 1, 1)
                                 .addComponent(nome))
                             .addComponent(limite))
-                        .addGap(254, 254, 254)
+                        .addGap(324, 324, 324)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,8 +324,10 @@ public class ViewContaEdicao extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nconta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
@@ -481,7 +492,31 @@ public class ViewContaEdicao extends javax.swing.JFrame {
     }//GEN-LAST:event_AlterarVencimentoActionPerformed
 
     private void ExcluirCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirCompraActionPerformed
-        // TODO add your handling code here:
+        
+        int row = table.getSelectedRow();
+        if(row != -1){
+            String cod = modelo.getValueAt(row, 1).toString();
+            int codigo = -1;
+            try {
+                codigo = Integer.parseInt(cod);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao converter srt to int\n" + e.getMessage());
+            }
+                
+            int x = JOptionPane.showConfirmDialog(null, "Confirma a exclusão do Itém: " + cod);
+            if(x==0){
+                
+                DAOCompra.excluirCompra(codigo);
+                
+                compra = DAOCompra.relatorioCompra(conta.getId());
+                setCompras();
+                
+                
+                JOptionPane.showMessageDialog(null, "Compra " + cod +" Excluída com Sucesso");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma compra na tabela");
+        }
     }//GEN-LAST:event_ExcluirCompraActionPerformed
 
     private void AlterarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarCompraActionPerformed
@@ -511,6 +546,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel limite;
     private javax.swing.JLabel limite1;
+    private javax.swing.JLabel nconta;
     private javax.swing.JLabel nome;
     private javax.swing.JFrame panel;
     private javax.swing.JTable table;

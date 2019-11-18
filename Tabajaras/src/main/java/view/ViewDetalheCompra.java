@@ -151,7 +151,7 @@ public class ViewDetalheCompra extends javax.swing.JFrame {
             String cod = modelo.getValueAt(row, 1).toString();
             int x = JOptionPane.showConfirmDialog(null, "Confirma a exclusão do Itém: " + cod);
             if(x==0){
-                //it.excluirItenCompra(compra.getCodCompra(), cod);
+                it.excluirItenCompra(compra.getCodCompra(), cod);
                 
                 total = total - compra.getProd().get(row).getPreco();
                 
