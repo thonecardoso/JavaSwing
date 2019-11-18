@@ -95,7 +95,7 @@ public class DAOConta {
             
             conexao=SingletonCon.getConexao();
             
-            if(tipo == 0){
+            if(tipo == 1){
                 
                 String SQL =    "SELECT id_conta, data_vencimento, total, id_cli \n" +
                                 "FROM conta c\n" +
@@ -104,9 +104,8 @@ public class DAOConta {
                                 "and tipo=1;";
                 stmt=conexao.prepareStatement(SQL);
                 stmt.setString(1, str);
-                //stmt.setInt(2, 1);
                 rs=stmt.executeQuery();
-            }else if(tipo ==1){
+            }else if(tipo ==2){
                 String SQL =    "SELECT id_conta, data_vencimento, total, id_cli \n" +
                                 "FROM conta c\n" +
                                 "join cliente cl on c.id_cli = cl.id_cliente\n" +
@@ -114,7 +113,6 @@ public class DAOConta {
                                 "and tipo=2;";
                 stmt=conexao.prepareStatement(SQL);
                 stmt.setString(1, str);
-                //stmt.setInt(2, 2);
                 rs=stmt.executeQuery();
             }else{
                 String SQL =    "SELECT id_conta, data_vencimento, total, id_cli \n" +
@@ -312,6 +310,30 @@ public class DAOConta {
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir a conta: "+e.getMessage());
         }
 
+
+    }
+    
+    public void ExcluirConta (Conta con) {
+
+        try {
+            conexao=SingletonCon.getConexao();	
+            String SQL = "DELETE FROM conta WHERE id_conta = ?";
+            stmt=conexao.prepareStatement(SQL);
+            stmt.setInt(1, con.getId());
+            stmt.execute();
+            
+
+            JOptionPane.showMessageDialog(null, "Cliente Excluído com Sucesso!");
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Cliente: "+e.getMessage());
+        }
+
+        try {
+            stmt.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão\n" + e.getMessage());
+        }
 
     }
 

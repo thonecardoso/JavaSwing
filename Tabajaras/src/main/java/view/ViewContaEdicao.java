@@ -124,7 +124,6 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         AlterarVencimento = new javax.swing.JButton();
-        AlterarCompra = new javax.swing.JButton();
         ExcluirCompra = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         limite1 = new javax.swing.JLabel();
@@ -134,6 +133,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         AlterarCliente = new javax.swing.JButton();
         adata = new javax.swing.JTextField();
         nconta = new javax.swing.JLabel();
+        ExcluirConta = new javax.swing.JButton();
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel.getContentPane());
         panel.getContentPane().setLayout(panelLayout);
@@ -147,6 +147,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,35 +162,47 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 289, 531, 300));
+
         jLabel4.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel4.setText("Total Conta:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, 35));
 
         valor.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         valor.setText("Valor");
+        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, 35));
 
         nome.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         nome.setText("cliente");
+        getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
 
         limite.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         limite.setText("Valor");
+        getContentPane().add(limite, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel6.setText("Vencimento:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 35));
 
         venc.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         venc.setText("Valor");
+        getContentPane().add(venc, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, 35));
 
         jLabel7.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel7.setText("Nome Cliente:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 35));
 
         jLabel8.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel8.setText("Limite de Crédito:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 35));
 
         jLabel9.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel9.setText("COMPRAS");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, 35));
 
         jLabel10.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel10.setText("RESUMO CONTA:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 12, -1, 35));
 
         AlterarVencimento.setText("Alterar Vencimento");
         AlterarVencimento.addActionListener(new java.awt.event.ActionListener() {
@@ -197,13 +210,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 AlterarVencimentoActionPerformed(evt);
             }
         });
-
-        AlterarCompra.setText("Alterar Compra");
-        AlterarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarCompraActionPerformed(evt);
-            }
-        });
+        getContentPane().add(AlterarVencimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 155, -1));
 
         ExcluirCompra.setText("Excluir Compra");
         ExcluirCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -211,12 +218,15 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 ExcluirCompraActionPerformed(evt);
             }
         });
+        getContentPane().add(ExcluirCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, 163, -1));
 
         jLabel11.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel11.setText("Crédito Disponível:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 35));
 
         limite1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         limite1.setText("Valor");
+        getContentPane().add(limite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
 
         BTDetalharCompra.setText("Detalhar Compra");
         BTDetalharCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +234,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 BTDetalharCompraActionPerformed(evt);
             }
         });
+        getContentPane().add(BTDetalharCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, 163, -1));
 
         combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pessoa Física", "Pessoa Juridica" }));
         combo.addActionListener(new java.awt.event.ActionListener() {
@@ -231,6 +242,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 comboActionPerformed(evt);
             }
         });
+        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, -1));
 
         cpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cpf.setText("CPF");
@@ -240,6 +252,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 cpfMouseClicked(evt);
             }
         });
+        getContentPane().add(cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 155, -1));
 
         AlterarCliente.setText("Alterar Cliente");
         AlterarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +260,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 AlterarClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(AlterarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 155, 45));
 
         adata.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         adata.setText("dd/MM/yyyy");
@@ -255,129 +269,19 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 adataMouseClicked(evt);
             }
         });
+        getContentPane().add(adata, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 160, -1));
 
         nconta.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 24)); // NOI18N
         nconta.setText("nconta");
+        getContentPane().add(nconta, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel11)
-                .addGap(10, 10, 10)
-                .addComponent(limite1)
-                .addGap(268, 268, 268)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AlterarVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(adata)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nconta))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(nome))
-                            .addComponent(limite))
-                        .addGap(324, 324, 324)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel6)
-                        .addGap(76, 76, 76)
-                        .addComponent(venc))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel4)
-                        .addGap(76, 76, 76)
-                        .addComponent(valor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(jLabel9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BTDetalharCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ExcluirCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AlterarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nconta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(nome)
-                        .addGap(16, 16, 16)
-                        .addComponent(limite))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(AlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(limite1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(adata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AlterarVencimento)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(venc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(BTDetalharCompra)
-                        .addGap(6, 6, 6)
-                        .addComponent(ExcluirCompra)
-                        .addGap(6, 6, 6)
-                        .addComponent(AlterarCompra))))
-        );
+        ExcluirConta.setText("Excluir Conta");
+        ExcluirConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirContaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ExcluirConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -519,19 +423,24 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ExcluirCompraActionPerformed
 
-    private void AlterarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AlterarCompraActionPerformed
+    private void ExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirContaActionPerformed
+       int x = JOptionPane.showConfirmDialog(null, "Confirma a Exclusão da Conta?");
+       if(x==0){
+           DAOConta.ExcluirConta(conta);
+           this.dispose();
+       }
+           
+    }//GEN-LAST:event_ExcluirContaActionPerformed
 
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterarCliente;
-    private javax.swing.JButton AlterarCompra;
     private javax.swing.JButton AlterarVencimento;
     private javax.swing.JButton BTDetalharCompra;
     private javax.swing.JButton ExcluirCompra;
+    private javax.swing.JButton ExcluirConta;
     private javax.swing.JTextField adata;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combo;
