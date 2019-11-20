@@ -102,11 +102,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nova Fatura"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novafaturaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="pagamento">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pagamento"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pagamentoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="label1">
       <Properties>

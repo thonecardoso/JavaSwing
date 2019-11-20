@@ -72,15 +72,6 @@ public class DAOConta {
                 JOptionPane.showMessageDialog(null, "Erro no relatório compra: "+e.getMessage());
         }
 
-        try {
-                rs.close();
-                stmt.close();
-                return contas;
-
-        }
-        catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar o relatório compra: "+e.getMessage());
-        }
         return contas;
     }
     
@@ -155,18 +146,10 @@ public class DAOConta {
 
         }
         catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "1Erro buscar contas: "+e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro buscar contas: "+e.getMessage());
         }
 
-        try {
-                rs.close();
-                stmt.close();
-                return contas;
-
-        }
-        catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar o conexão ao buscar contas: "+e.getMessage());
-        }
+        
         return contas;
     }
     
@@ -248,18 +231,10 @@ public class DAOConta {
 
         }
         catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "1Erro buscar contas: "+e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro buscar contas: "+e.getMessage());
         }
 
-        try {
-                rs.close();
-                stmt.close();
-                return contas;
-
-        }
-        catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar o conexão ao buscar contas: "+e.getMessage());
-        }
+        
         return contas;
     }
     
@@ -313,15 +288,7 @@ public class DAOConta {
                 JOptionPane.showMessageDialog(null, "Erro no relatório compra: "+e.getMessage());
         }
 
-        try {
-            rs.close();
-            stmt.close();
-            return contas;
-
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar o relatório compra: "+e.getMessage());
-        }
+        
         return contas;
     }
 
@@ -372,15 +339,7 @@ public class DAOConta {
                 JOptionPane.showMessageDialog(null, "Erro no relatório compra: "+e.getMessage());
         }
 
-        try {
-                rs.close();
-                stmt.close();
-                return contas;
-
-        }
-        catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar o relatório compra: "+e.getMessage());
-        }
+        
         return contas;
     }
     
@@ -433,16 +392,6 @@ public class DAOConta {
                 JOptionPane.showMessageDialog(null, "Erro ao pegar conta: \n"+e.getMessage());
         }
 
-        /*try {
-                rs.close();
-                stmt.close();
-                conexao.close();
-                return conta;
-
-        }
-        catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar o conexão: \n"+e.getMessage());
-        }*/
         return conta;
     }
 
@@ -460,7 +409,7 @@ public class DAOConta {
             con.setId(buscarId());
             daocompra.cadastroCompra(con.getCompras(), con.getId());
 
-            stmt.close();
+            
             JOptionPane.showMessageDialog(null, "\nCadastro efetuado com sucesso.");
         }
         catch(Exception e) {
@@ -486,11 +435,7 @@ public class DAOConta {
             JOptionPane.showMessageDialog(null, "Erro ao Excluir Cliente: "+e.getMessage());
         }
 
-        try {
-            stmt.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão\n" + e.getMessage());
-        }
+        
 
     }
 
@@ -539,11 +484,7 @@ public class DAOConta {
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir a conta: "+e.getMessage());
         }
 
-        try {    
-            stmt.close();                    
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        
 
 
 
@@ -570,11 +511,7 @@ public class DAOConta {
             JOptionPane.showMessageDialog(null, "Erro ao tentar Alterar Data: "+e.getMessage());
         }
 
-        try {    
-            stmt.close();                    
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        
 
 
 

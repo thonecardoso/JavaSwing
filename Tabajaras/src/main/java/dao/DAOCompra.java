@@ -63,15 +63,7 @@ public class DAOCompra {
                 JOptionPane.showMessageDialog(null, "Erro no relatório compra: "+e.getMessage());
         }
 
-        try {
-            rs.close();
-            stmt.close();
-            return compras;
-
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar o relatório compra: "+e.getMessage());
-        }
+        
         return compras;
     }
 
@@ -182,17 +174,10 @@ public class DAOCompra {
 
         }
         catch(Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao tentar inserir a compra: "+e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao tentar excluir a compra: "+e.getMessage());
         }
 
-        try {
-                stmt.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Erro ao fechar conexão" + e.getMessage());
-        }
-
-
-
+       
 
     }
         

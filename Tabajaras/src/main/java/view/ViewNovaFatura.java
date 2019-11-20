@@ -330,11 +330,12 @@ public class ViewNovaFatura extends javax.swing.JFrame {
         for(int x = 0; x<qtparcelas; x++){
             Pagamento p = new Pagamento();
             LocalDate data = conta.getDataVencimento().plus(Period.ofMonths(x));
-            p.setData(data);
+            p.setDataVencimento(data);
             p.setJuros(0);           
             p.setTipo(x+1);
             p.setValor(parc);
             pag.add(p);
+            
         }
         fatura.setParcelas(pag);
         fatura.setQuantParcela(qtparcelas);

@@ -4,16 +4,18 @@ import java.time.LocalDate;
 
 public class Pagamento {
     
-    private LocalDate data;
-	private double valor;
-	private int tipo;
-	private double juros;
-	private int id;
-        private int id_fatura;
-        private boolean paga;
+    private LocalDate dataVencimento;
+    private LocalDate dataPagamento;
+    private double valor;
+    private int tipo;
+    private double juros;
+    private int id;
+    private int id_fatura;
+    private boolean paga;
 
-    public Pagamento(LocalDate data, double valor, int tipo, double juros, int id, int id_fatura, boolean paga) {
-        this.data = data;
+    public Pagamento(LocalDate dataVencimento, double valor, int tipo, double juros, int id, int id_fatura, boolean paga, LocalDate dataPagamento) {
+        this.dataVencimento = dataVencimento;
+        this.dataPagamento = dataPagamento;
         this.valor = valor;
         this.tipo = tipo;
         this.juros = juros;
@@ -21,69 +23,80 @@ public class Pagamento {
         this.id_fatura = id_fatura;
         this.paga = paga;
     }
+
+    
 	
 	
 
-	public Pagamento() {
-		
-	}
+    public Pagamento() {
 
-	public LocalDate getData() {
-		return data;
-	}
+    }
 
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
+    public LocalDate getDataVencimento() {
+        return dataVencimento;
+    }
 
-	public double getValor() {
-		return valor;
-	}
+    public void setDataVencimento(LocalDate dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
 
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
 
-	public int getTipo() {
-		return tipo;
-	}
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
 
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
-	}
+    public double getValor() {
+        return valor;
+    }
 
-	public double getJuros() {
-		return juros;
-	}
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 
-	public void setJuros(double juros) {
-		this.juros = juros;
-	}
+    public int getTipo() {
+        return tipo;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public double getJuros() {
+        return juros;
+    }
 
-        public int getId_fatura() {
-            return id_fatura;
-        }
+    public void setJuros(double juros) {
+        this.juros = juros;
+    }
 
-        public void setId_fatura(int id_fatura) {
-            this.id_fatura = id_fatura;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public boolean isPaga() {
-            return paga;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public void setPaga(boolean paga) {
-            this.paga = paga;
-        }
+    public int getId_fatura() {
+        return id_fatura;
+    }
 
+    public void setId_fatura(int id_fatura) {
+        this.id_fatura = id_fatura;
+    }
+
+    public boolean isPaga() {
+        return paga;
+    }
+
+    public void setPaga(boolean paga) {
+        this.paga = paga;
+    }
+
+	
         
 
         

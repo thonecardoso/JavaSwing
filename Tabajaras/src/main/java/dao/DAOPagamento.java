@@ -28,14 +28,16 @@ public class DAOPagamento {
          
          
         for(Pagamento p: pag){
+            
+            
              
             try {
                 conexao=SingletonCon.getConexao();	
                 String SQL = "INSERT INTO public.pagamento(\n" +
-                "	data, valor, tipo, juros, id_fatura)\n" +
+                "	data_vencimento, valor, tipo, juros, id_fatura)\n" +
                 "	VALUES (TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, ?);";
                 stmt=conexao.prepareStatement(SQL);
-                stmt.setString(1, p.getData().format(format));
+                stmt.setString(1, p.getDataVencimento().format(format));
                 stmt.setDouble(2, p.getValor());
                 stmt.setInt(3, p.getTipo());
                 stmt.setDouble(4, p.getJuros());
@@ -48,11 +50,6 @@ public class DAOPagamento {
                 JOptionPane.showMessageDialog(null, "Erro ao tentar inserir pagamento: "+e.getMessage());
             }
             
-            try {
-                stmt.close();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: \n"+e.getMessage());
-            }
              
         }
 
@@ -65,9 +62,10 @@ public class DAOPagamento {
         try {
             
             conexao = SingletonCon.getConexao();
-
-            String SQL = "SELECT id, data, valor, tipo, juros, paga FROM pagamento "
-                         + "WHERE id_fatura = ? ";
+                                
+            String SQL = "SELECT id, data_vencimento, valor, tipo, juros, paga, data_pagamento FROM pagamento "
+                         + "WHERE id_fatura = ? "
+                         + "ORDER BY id ASC";
                         
             //String SQL = "SELECT id, data, valor, tipo, juros, paga\n" +
             //"	FROM public.pagamento WHERE id_fatura = ?";            
@@ -80,27 +78,63 @@ public class DAOPagamento {
             while (rs.next()) {
                 
                 int id = rs.getInt(1);
-                String dataVencimento = rs.getObject(2).toString();
+                String dataV = rs.getObject(2).toString();
                 double valor = rs.getDouble(3);
                 int tipo = rs.getInt(4);
                 double juros = rs.getDouble(5);
                 boolean paga = rs.getBoolean(6);
-                //boolean paga = false;
                 
-                LocalDate data;
-                data = LocalDate.parse(dataVencimento, formater);
-                
+                LocalDate dataVencimento, dataPagamento=null;
+                String dataP="";
+                if(paga){
+                  dataP = rs.getObject(7).toString();                    
+                    try {
+                        dataPagamento = LocalDate.parse(dataP, formater);
 
-                pag.add(new Pagamento(data,valor,tipo,juros,id,id_fat,paga));
+                    } catch (Exception e) {
+                        dataPagamento = null;
+                        JOptionPane.showMessageDialog(null, "Erro parse localdate pagamento\n" + e);
+                    }
+                }
+                
+                
+                try {
+                    dataVencimento = LocalDate.parse(dataV, formater);
+                    
+                } catch (Exception e) {
+                    dataVencimento = null;
+                    JOptionPane.showMessageDialog(null, "Erro parse localdate vencimento\n" + e);
+                    
+                }
+
+                pag.add(new Pagamento(dataVencimento,valor,tipo,juros,id,id_fat,paga,dataPagamento));
             }
             
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro" + e);
         }
         
         
         return pag;
+    }
+    
+    public void inserirPagamento(int id){
+        
+        try {
+            conexao = SingletonCon.getConexao();
+                                
+            String SQL =    "UPDATE pagamento SET data_pagamento = NOW(),paga = true " +
+                            "WHERE id = ?;";
+                        
+            
+            stmt = conexao.prepareStatement(SQL);
+            stmt.setInt(1, id);
+            stmt.execute();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir pagamento!" + e);
+        }
     }
     
 }

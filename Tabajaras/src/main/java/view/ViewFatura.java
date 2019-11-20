@@ -13,10 +13,12 @@ public class ViewFatura extends javax.swing.JFrame {
     
     DAOFatura faturaDAO = new DAOFatura();
     ArrayList<Fatura> faturas;
+    Fatura fatura;
     DefaultTableModel modelo;
     private Locale locale = new Locale("pt", "BR");
     private NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
 
     public ViewFatura() {
         initComponents();
@@ -86,8 +88,18 @@ public class ViewFatura extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         novafatura.setText("Nova Fatura");
+        novafatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novafaturaActionPerformed(evt);
+            }
+        });
 
         pagamento.setText("Pagamento");
+        pagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagamentoActionPerformed(evt);
+            }
+        });
 
         label1.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         label1.setText("Selecione uma Fatura para pagamento");
@@ -185,22 +197,15 @@ public class ViewFatura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        /*int x = table.getSelectedRow();
-        conta = contas.get(x);
-        nome.setText(conta.getCli().getNome());
-        vencimento.setText(conta.getDataVencimento().format(format));
-        id.setText(String.valueOf(conta.getId()));
-        totalconta.setText(nf.format(conta.getTotal()));
+        int x = table.getSelectedRow();
+        fatura = faturas.get(x);
+        
+        ViewPagamento vp = new ViewPagamento(fatura);
+        vp.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        vp.setVisible(true);
+        
 
-        qtparcelas = 1 + combp.getSelectedIndex();
-        if(conta!=null){
-            juros = jr.calculaJurosPorParcelamento(conta.getTotal(), conta.getDataVencimento(), qtparcelas);
-            totalvalorfatura = conta.getTotal() + juros;
-            double parc = totalvalorfatura/qtparcelas;
-            parcela.setText(nf.format(parc));
-            totalfatura.setText(nf.format(totalvalorfatura));
-
-        }*/
+        
 
     }//GEN-LAST:event_tableMouseClicked
 
@@ -221,6 +226,16 @@ public class ViewFatura extends javax.swing.JFrame {
         faturas = faturaDAO.relatorioFatura(combbuscatabela.getSelectedIndex(), str);
         preencherTabela(faturas);
     }//GEN-LAST:event_filtroKeyTyped
+
+    private void pagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pagamentoActionPerformed
+
+    private void novafaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novafaturaActionPerformed
+        ViewNovaFatura vnf = new ViewNovaFatura();
+        vnf.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        vnf.setVisible(true);
+    }//GEN-LAST:event_novafaturaActionPerformed
 
     /**
      * @param args the command line arguments

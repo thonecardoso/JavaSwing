@@ -149,13 +149,6 @@ public class DAOFatura {
                                 "JOIN cliente cl ON c.id_cli = cl.id_cliente " +
                                 "WHERE cl.nome LIKE ? AND cl.tipo=1";
                 
-               /* String SQL =    "SELECT id_fatura, id_conta_fatura, data_quitacao, quantidade_parcelas, juros " +
-                                "FROM fatura f " +
-                                "JOIN conta c ON f.id_conta_fatura = c.id_conta " +
-                                "JOIN cliente cl ON c.id_cli = cl.id_cliente " +
-                                "WHERE cl.nome LIKE ? AND cl.tipo=1";*/
-                
-                
                 stmt=conexao.prepareStatement(SQL);
                 stmt.setString(1, str);
                 rs=stmt.executeQuery();
