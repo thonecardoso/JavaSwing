@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Fatura {
     
-    private Conta conta;
+        private Conta conta;
 	private LocalDate dataQuitacao;
 	private double juros;
 	private Integer quantParcela;
 	public ArrayList <Pagamento> parcelas;
-	private int idFatura;
+	private int id;
 	
 	public Fatura(Conta conta, LocalDate dataQuitacao, double juros, Integer quantParcela,
 			ArrayList<Pagamento> parcelas, int idFatura) {
@@ -20,18 +20,21 @@ public class Fatura {
 		this.juros = juros;
 		this.quantParcela = quantParcela;
 		this.parcelas = parcelas;
-		this.idFatura=idFatura;
+		this.id=idFatura;
 	}
-public Fatura() {
-}
+        
+        public Fatura() {
+            parcelas = new ArrayList<>();
+        }
 
 	
-	public int getIdFatura() {
-	return idFatura;
+	public int getId() {
+	return id;
 }
-public void setIdFatura(int idFatura) {
-	this.idFatura = idFatura;
-}
+        public void setId(int idFatura) {
+            this.id = idFatura;
+        }
+        
 	public Conta getConta() {
 		return conta;
 	}

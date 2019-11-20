@@ -18,7 +18,7 @@ public class SingletonCon {
 				prop.put("lc_ctype", "ISO8859_1");
 
 				conexao=DriverManager.getConnection("jdbc:postgresql://localhost:5432/tabajara", prop);
-			}
+                        }
                         
 			return conexao;
                        

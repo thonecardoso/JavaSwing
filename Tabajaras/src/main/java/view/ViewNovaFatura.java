@@ -1,18 +1,24 @@
 package view;
 
 import dao.DAOConta;
+import dao.DAOFatura;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Conta;
+import model.Fatura;
 import model.Juros;
+import model.Pagamento;
 
 public class ViewNovaFatura extends javax.swing.JFrame {
     
     private DAOConta contaDAO = new DAOConta();
+    private DAOFatura faturaDAO = new DAOFatura();
     private ArrayList<Conta> contas = new ArrayList<>();
     private Conta conta = null;
     
@@ -23,6 +29,8 @@ public class ViewNovaFatura extends javax.swing.JFrame {
     private Locale locale = new Locale("pt", "BR");
     private NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
     
+    private Fatura fatura;
+    
     private int qtparcelas;
     private double juros;
     private double totalvalorfatura;
@@ -32,7 +40,13 @@ public class ViewNovaFatura extends javax.swing.JFrame {
         initComponents();
         
         this.qtparcelas = 1 + combp.getSelectedIndex();
-        contas = contaDAO.relatorioConta();
+        
+        String str = "";
+        str ="%"+str+"%";
+        contas = contaDAO.relatorioContaParaGerarFatura(comb.getSelectedIndex(), str);
+        
+        //contas = contaDAO.relatorioConta();
+        fatura = new Fatura();
         preencherTabela(contas);
     }
 
@@ -40,7 +54,7 @@ public class ViewNovaFatura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        GerarFatura = new javax.swing.JButton();
         combp = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -62,7 +76,12 @@ public class ViewNovaFatura extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Gerar Fatura");
+        GerarFatura.setText("Gerar Fatura");
+        GerarFatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerarFaturaActionPerformed(evt);
+            }
+        });
 
         combp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01x", "02x", "03x", "04x", "05x", "06x", "07x", "08x", "09x", "10x", "11x", "12x" }));
         combp.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +198,7 @@ public class ViewNovaFatura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(GerarFatura))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(combp, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,7 +262,7 @@ public class ViewNovaFatura extends javax.swing.JFrame {
                         .addComponent(combp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)))
                 .addGap(14, 14, 14)
-                .addComponent(jButton1)
+                .addComponent(GerarFatura)
                 .addContainerGap())
         );
 
@@ -253,7 +272,8 @@ public class ViewNovaFatura extends javax.swing.JFrame {
     private void combActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combActionPerformed
         String str = "";
         str ="%"+str+"%";
-        contas = contaDAO.relatorioConta(comb.getSelectedIndex(), str);
+        contas = contaDAO.relatorioContaParaGerarFatura(comb.getSelectedIndex(), str);
+        //contas = contaDAO.relatorioConta(comb.getSelectedIndex(), str);
         preencherTabela(contas);
     }//GEN-LAST:event_combActionPerformed
 
@@ -264,7 +284,8 @@ public class ViewNovaFatura extends javax.swing.JFrame {
     private void filtroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroKeyTyped
         String str = filtro.getText();
         str ="%"+str+"%";
-        contas = contaDAO.relatorioConta(comb.getSelectedIndex(), str);
+        contas = contaDAO.relatorioContaParaGerarFatura(comb.getSelectedIndex(), str);
+        //contas = contaDAO.relatorioConta(comb.getSelectedIndex(), str);
         preencherTabela(contas);
     }//GEN-LAST:event_filtroKeyTyped
 
@@ -276,6 +297,17 @@ public class ViewNovaFatura extends javax.swing.JFrame {
         id.setText(String.valueOf(conta.getId()));
         totalconta.setText(nf.format(conta.getTotal()));
         
+        
+        qtparcelas = 1 + combp.getSelectedIndex();
+        if(conta!=null){
+            juros = jr.calculaJurosPorParcelamento(conta.getTotal(), conta.getDataVencimento(), qtparcelas);
+            totalvalorfatura = conta.getTotal() + juros;
+            double parc = totalvalorfatura/qtparcelas;
+            parcela.setText(nf.format(parc));
+            totalfatura.setText(nf.format(totalvalorfatura));
+            
+        }
+        
     }//GEN-LAST:event_tableMouseClicked
 
     private void combpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combpActionPerformed
@@ -286,9 +318,36 @@ public class ViewNovaFatura extends javax.swing.JFrame {
             double parc = totalvalorfatura/qtparcelas;
             parcela.setText(nf.format(parc));
             totalfatura.setText(nf.format(totalvalorfatura));
-            System.out.println(parc);
+            
         }
     }//GEN-LAST:event_combpActionPerformed
+
+    private void GerarFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerarFaturaActionPerformed
+        
+        double parc = totalvalorfatura/qtparcelas;
+        ArrayList<Pagamento> pag = new ArrayList<>();
+        int id = faturaDAO.buscarId();
+        for(int x = 0; x<qtparcelas; x++){
+            Pagamento p = new Pagamento();
+            LocalDate data = conta.getDataVencimento().plus(Period.ofMonths(x));
+            p.setData(data);
+            p.setJuros(0);           
+            p.setTipo(x+1);
+            p.setValor(parc);
+            pag.add(p);
+        }
+        fatura.setParcelas(pag);
+        fatura.setQuantParcela(qtparcelas);
+        fatura.setConta(conta);
+        fatura.setDataQuitacao(conta.getDataVencimento().plus(Period.ofMonths(qtparcelas-1)));
+        fatura.setJuros(juros);
+        fatura.setId(id);
+        
+        faturaDAO.cadastrarFatura(fatura);
+        JOptionPane.showMessageDialog(null, "Fatura Gerada com Sucesso!");
+        this.dispose();
+
+    }//GEN-LAST:event_GerarFaturaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -360,11 +419,11 @@ public class ViewNovaFatura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GerarFatura;
     private javax.swing.JComboBox<String> comb;
     private javax.swing.JComboBox<String> combp;
     private javax.swing.JTextField filtro;
     private javax.swing.JLabel id;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

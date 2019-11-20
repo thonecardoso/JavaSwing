@@ -12,9 +12,9 @@ public class DAOConta {
     private ResultSet rs;
     private PreparedStatement stmt;
     private Connection conexao;
-    private DAOCliente daocli;
     private DAOCompra daocompra;
     private DateTimeFormatter format;
+    private DAOCliente daocli;
 
 
     public DAOConta() {
@@ -169,6 +169,101 @@ public class DAOConta {
         }
         return contas;
     }
+    
+    
+    
+    public ArrayList<Conta> relatorioContaParaGerarFatura(int tipo, String str) {
+
+        ArrayList <Conta> contas = new ArrayList<>();
+        ArrayList <Compra> compras = new ArrayList<>();
+        ArrayList <Cliente> clientes = new ArrayList<>();
+        Cliente cli=null;
+            
+        try {
+            
+            conexao=SingletonCon.getConexao();
+            
+            if(tipo == 1){
+                
+                String SQL =    "SELECT id_conta, data_vencimento, total, id_cli \n" +
+                                "FROM conta c\n" +
+                                "join cliente cl on c.id_cli = cl.id_cliente\n" +
+                                "where cl.nome like ? " +
+                                "and tipo=1 " + 
+                                "AND id_conta NOT IN (select id_conta_fatura from fatura)";
+                
+                
+                stmt=conexao.prepareStatement(SQL);
+                stmt.setString(1, str);
+                rs=stmt.executeQuery();
+            }else if(tipo ==2){
+                String SQL =    "SELECT id_conta, data_vencimento, total, id_cli \n" +
+                                "FROM conta c\n" +
+                                "join cliente cl on c.id_cli = cl.id_cliente\n" +
+                                "where cl.nome like ?\n" +
+                                "and tipo=2 " + 
+                                "AND id_conta NOT IN (select id_conta_fatura from fatura)";
+                stmt=conexao.prepareStatement(SQL);
+                stmt.setString(1, str);
+                rs=stmt.executeQuery();
+            }else{
+                String SQL =    "SELECT id_conta, data_vencimento, total, id_cli \n" +
+                                "FROM conta c\n" +
+                                "join cliente cl on c.id_cli = cl.id_cliente\n" +
+                                "where cl.nome like ? " + 
+                                "AND id_conta NOT IN (select id_conta_fatura from fatura)";
+                stmt=conexao.prepareStatement(SQL);
+                stmt.setString(1, str);                
+                rs=stmt.executeQuery();
+            }
+
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            while(rs.next()) {
+                
+                int idConta;
+                int idCliente;
+                LocalDate data;
+                Double total;
+                String dataVencimento;
+
+                idConta=rs.getInt("id_conta");
+                idCliente=rs.getInt("id_cli");
+                total=rs.getDouble("total");
+                dataVencimento = rs.getObject("data_vencimento").toString();
+
+                compras=daocompra.relatorioCompra(idConta);
+                clientes=daocli.ArrayClientes();
+                for(int i=0;i<clientes.size();i++) {
+                    if(clientes.get(i).getId()==idCliente)
+                        cli=clientes.get(i);
+                }
+
+                data = LocalDate.parse(dataVencimento, formater);
+
+                Conta con = new Conta(compras, data,total,cli,idConta);
+                contas.add(con);
+
+            }
+
+        }
+        catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "1Erro buscar contas: "+e.getMessage());
+        }
+
+        try {
+                rs.close();
+                stmt.close();
+                return contas;
+
+        }
+        catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar o conexão ao buscar contas: "+e.getMessage());
+        }
+        return contas;
+    }
+    
+    
 
     public ArrayList<Conta> ContaFisica(int chave) {
 
@@ -287,6 +382,68 @@ public class DAOConta {
                 JOptionPane.showMessageDialog(null, "Erro ao fechar o relatório compra: "+e.getMessage());
         }
         return contas;
+    }
+    
+    public Conta buscarConta(int id_conta) {
+
+        
+        ArrayList <Compra> compras = new ArrayList<>();
+        ArrayList <Cliente> clientes = new ArrayList<>();
+        Conta conta = null;
+        Cliente cli=null;
+        try {
+            conexao=SingletonCon.getConexao();
+
+            String SQL = "SELECT * FROM conta where id_conta = ?";
+            stmt=conexao.prepareStatement(SQL);
+            stmt.setInt(1, id_conta);
+            rs=stmt.executeQuery();
+            
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            if(rs.next()) {
+                int idConta;
+                int idCliente;
+                LocalDate data;
+                Double total;
+                String dataVencimento;
+
+                idConta=rs.getInt("id_conta");
+                idCliente=rs.getInt("id_cli");
+                total=rs.getDouble("total");
+                dataVencimento = rs.getObject("data_vencimento").toString();
+
+                compras=daocompra.relatorioCompra(idConta);
+                clientes=daocli.ArrayClientes();
+                
+                for(int i=0;i<clientes.size();i++) {
+                    if(clientes.get(i).getId()==idCliente)
+                        cli=clientes.get(i);
+                }
+
+                data = LocalDate.parse(dataVencimento, formater);
+
+                conta = new Conta(compras, data,total,cli,idConta);
+                
+
+            }
+
+        }
+        catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao pegar conta: \n"+e.getMessage());
+        }
+
+        /*try {
+                rs.close();
+                stmt.close();
+                conexao.close();
+                return conta;
+
+        }
+        catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar o conexão: \n"+e.getMessage());
+        }*/
+        return conta;
     }
 
 

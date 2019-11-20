@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package view;
 
 import dao.DAOFatura;
@@ -6,10 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
-import model.Conta;
 import model.Fatura;
 
-public class ViewFatura extends javax.swing.JFrame {
+public class ViewFaturaOne extends javax.swing.JFrame {
     
     DAOFatura faturaDAO = new DAOFatura();
     ArrayList<Fatura> faturas;
@@ -18,12 +22,12 @@ public class ViewFatura extends javax.swing.JFrame {
     private NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public ViewFatura() {
+    public ViewFaturaOne() {
         initComponents();
         faturas  = faturaDAO.relatorioFatura();
         preencherTabela(faturas);
     }
-    
+
     public void preencherTabela(ArrayList<Fatura> f){
         modelo = new DefaultTableModel();
         
@@ -51,7 +55,6 @@ public class ViewFatura extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                     String.valueOf(numeroitem++),
                     String.valueOf(fat.getId()),
-                    String.valueOf(fat.getConta().getId()),
                     fat.getConta().getCli().getNome(),
                     tipo,
                     String.valueOf(fat.getQuantParcela()),
@@ -61,36 +64,20 @@ public class ViewFatura extends javax.swing.JFrame {
        }
        table.setModel(modelo);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        novafatura = new javax.swing.JButton();
-        pagamento = new javax.swing.JButton();
-        label1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         combbuscatabela = new javax.swing.JComboBox<>();
         filtro = new javax.swing.JTextField();
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        novafatura = new javax.swing.JButton();
+        pagamento = new javax.swing.JButton();
+        label1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        novafatura.setText("Nova Fatura");
-
-        pagamento.setText("Pagamento");
-
-        label1.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
-        label1.setText("Selecione uma Fatura para pagamento");
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,44 +128,48 @@ public class ViewFatura extends javax.swing.JFrame {
             }
         });
 
+        novafatura.setText("Nova Fatura");
+
+        pagamento.setText("Pagamento");
+
+        label1.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
+        label1.setText("Selecione uma Fatura para pagamento");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(novafatura)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label1)
                         .addGap(36, 36, 36)
-                        .addComponent(pagamento)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pagamento))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(combbuscatabela, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(46, 46, 46)
                 .addComponent(novafatura)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
                     .addComponent(pagamento))
-                .addGap(78, 78, 78)
+                .addGap(132, 132, 132)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(combbuscatabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -201,7 +192,6 @@ public class ViewFatura extends javax.swing.JFrame {
             totalfatura.setText(nf.format(totalvalorfatura));
 
         }*/
-
     }//GEN-LAST:event_tableMouseClicked
 
     private void combbuscatabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combbuscatabelaActionPerformed
@@ -239,31 +229,27 @@ public class ViewFatura extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewFatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFaturaOne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewFatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFaturaOne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewFatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFaturaOne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewFatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFaturaOne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewFatura().setVisible(true);
+                new ViewFaturaOne().setVisible(true);
             }
         });
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combbuscatabela;
     private javax.swing.JTextField filtro;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel label1;
     private javax.swing.JButton novafatura;
