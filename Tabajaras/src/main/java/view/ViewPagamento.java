@@ -1,5 +1,6 @@
 package view;
 
+import dao.DAOFatura;
 import dao.DAOPagamento;
 import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +22,7 @@ public class ViewPagamento extends javax.swing.JFrame {
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     private DAOPagamento pagDAO = new DAOPagamento();
+    private DAOFatura faturaDAO = new DAOFatura();
     
     
     public ViewPagamento(Fatura fat) {
@@ -104,11 +106,12 @@ public class ViewPagamento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        PagarParcela = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         Emdebito = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         idconta = new javax.swing.JLabel();
+        AtualizarPainelPagamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,10 +180,10 @@ public class ViewPagamento extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jLabel5.setText("Total Pago:");
 
-        jButton1.setText("PAGAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        PagarParcela.setText("PAGAR");
+        PagarParcela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PagarParcelaActionPerformed(evt);
             }
         });
 
@@ -195,6 +198,13 @@ public class ViewPagamento extends javax.swing.JFrame {
 
         idconta.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         idconta.setText("id");
+
+        AtualizarPainelPagamento.setText("Refresh");
+        AtualizarPainelPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarPainelPagamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,17 +231,23 @@ public class ViewPagamento extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(idconta))
-                            .addComponent(Recebido)
                             .addComponent(vencimento)
-                            .addComponent(nome)
-                            .addComponent(Emdebito))
+                            .addComponent(nome))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(totalfatura)
-                            .addComponent(parcela))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Recebido)
+                                    .addComponent(Emdebito))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AtualizarPainelPagamento))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalfatura)
+                                    .addComponent(parcela))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                                .addComponent(PagarParcela)))
                         .addGap(30, 30, 30))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -266,7 +282,10 @@ public class ViewPagamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Recebido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Emdebito)))
+                        .addComponent(Emdebito))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(AtualizarPainelPagamento)
+                        .addGap(6, 6, 6)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +301,7 @@ public class ViewPagamento extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jButton1)
+                        .addComponent(PagarParcela)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -294,16 +313,29 @@ public class ViewPagamento extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tableMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int id = Integer.parseInt(modelo.getValueAt(table.getSelectedRow(), 1).toString());
-        int x = JOptionPane.showConfirmDialog(null, "Confirma o Pagamento de ID: " + id);
-        if(x==0){
-            pagDAO.inserirPagamento(id);
-            JOptionPane.showMessageDialog(null, "Pagamento efetivado com Sucesso!");
+    private void PagarParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagarParcelaActionPerformed
+        int index = table.getSelectedRow();
+        if(fatura.getParcelas().get(index).isPaga()){
+            JOptionPane.showMessageDialog(null, "Essa Parcela já está pagar\nObrigado tente pagar outra!!!");
         }else{
-            JOptionPane.showMessageDialog(null, "Pagamento não efetivado!");
+            int id = Integer.parseInt(modelo.getValueAt(index, 1).toString());
+            int x = JOptionPane.showConfirmDialog(null, "Confirma o Pagamento de ID: " + id);
+            if(x==0){
+                pagDAO.inserirPagamento(id);
+                JOptionPane.showMessageDialog(null, "Pagamento efetivado com Sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Pagamento não efetivado!");
+            } 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+    }//GEN-LAST:event_PagarParcelaActionPerformed
+
+    private void AtualizarPainelPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarPainelPagamentoActionPerformed
+        fatura = faturaDAO.buscarFatura(fatura.getId());
+        preencherTabela();
+        preencherComponentes();
+    }//GEN-LAST:event_AtualizarPainelPagamentoActionPerformed
 
     /*public static void main(String args[]) {
         try {
@@ -331,11 +363,12 @@ public class ViewPagamento extends javax.swing.JFrame {
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AtualizarPainelPagamento;
     private javax.swing.JLabel Emdebito;
+    private javax.swing.JButton PagarParcela;
     private javax.swing.JLabel Recebido;
     private javax.swing.JLabel idconta;
     private javax.swing.JLabel idfatura;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

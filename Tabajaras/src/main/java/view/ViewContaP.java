@@ -92,6 +92,7 @@ public class ViewContaP extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         comb = new javax.swing.JComboBox<>();
         filtro = new javax.swing.JTextField();
+        Refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -190,6 +191,14 @@ public class ViewContaP extends javax.swing.JFrame {
         });
         getContentPane().add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 300, -1));
 
+        Refresh.setText("Refresh");
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -268,6 +277,11 @@ public class ViewContaP extends javax.swing.JFrame {
         preencherTabela(contas);
     }//GEN-LAST:event_combActionPerformed
 
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        contas = contaDAO.relatorioConta();
+        preencherTabela(contas);
+    }//GEN-LAST:event_RefreshActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -304,6 +318,7 @@ public class ViewContaP extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Busca_ID_CONTA;
+    private javax.swing.JButton Refresh;
     private javax.swing.JButton RelatorioConta;
     private javax.swing.JComboBox<String> comb;
     private javax.swing.JTextField filtro;

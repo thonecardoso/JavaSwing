@@ -15,24 +15,7 @@ public class GerenciadorCliente {
 		
 	}
         
-    public ArrayList<Cliente> consultar(String busca, int tipo) {
-
-            ArrayList<Cliente> retorno = new ArrayList<>();
-            switch (tipo){
-                
-                case 1:
-                    retorno.add(cd.buscarPessoaFisica(busca));
-                    
-                    break;
-                case 2:
-                    retorno.add(cd.buscarPessoaJuridica(busca));
-                    break;
-            
-            }
-            
-            return retorno;
-
-    }
+    
 
     public String relatorio1() {
 
@@ -129,5 +112,14 @@ public class GerenciadorCliente {
                     return str;
 
 	}
+    
+        public double creditoDisponivel(int id){
+            double x = 0;
+            
+            
+            
+            
+            return x;
+        }
 
 }

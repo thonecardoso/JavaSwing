@@ -77,6 +77,7 @@ public class ViewFatura extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         combbuscatabela = new javax.swing.JComboBox<>();
         filtro = new javax.swing.JTextField();
+        AtualizarViewFatura = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -153,6 +154,13 @@ public class ViewFatura extends javax.swing.JFrame {
             }
         });
 
+        AtualizarViewFatura.setText("Refresh");
+        AtualizarViewFatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarViewFaturaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,7 +168,10 @@ public class ViewFatura extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(novafatura)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(novafatura)
+                        .addGap(30, 30, 30)
+                        .addComponent(AtualizarViewFatura))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label1)
                         .addGap(36, 36, 36)
@@ -179,7 +190,9 @@ public class ViewFatura extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(novafatura)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(novafatura)
+                    .addComponent(AtualizarViewFatura))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
@@ -222,7 +235,7 @@ public class ViewFatura extends javax.swing.JFrame {
 
     private void filtroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroKeyTyped
         String str = filtro.getText();
-        str ="%"+str+"%";
+        str ="%"+str+"%"; 
         faturas = faturaDAO.relatorioFatura(combbuscatabela.getSelectedIndex(), str);
         preencherTabela(faturas);
     }//GEN-LAST:event_filtroKeyTyped
@@ -236,6 +249,11 @@ public class ViewFatura extends javax.swing.JFrame {
         vnf.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         vnf.setVisible(true);
     }//GEN-LAST:event_novafaturaActionPerformed
+
+    private void AtualizarViewFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarViewFaturaActionPerformed
+        faturas  = faturaDAO.relatorioFatura();
+        preencherTabela(faturas);
+    }//GEN-LAST:event_AtualizarViewFaturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,6 +293,7 @@ public class ViewFatura extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AtualizarViewFatura;
     private javax.swing.JComboBox<String> combbuscatabela;
     private javax.swing.JTextField filtro;
     private javax.swing.JList<String> jList1;

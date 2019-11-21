@@ -133,6 +133,51 @@ public class DAOFatura {
         return fat;
     }
     
+    public Fatura buscarFatura(int id_fat){
+        
+        Fatura fat = null;
+        
+        try {
+            
+            conexao = SingletonCon.getConexao();
+
+            String SQL = "SELECT id_conta_fatura, data_quitacao, "
+                    + "quantidade_parcelas, juros " +
+                    "FROM public.fatura WHERE id_fatura = ? ;";
+            stmt = conexao.prepareStatement(SQL);
+            stmt.setInt(1, id_fat);
+            rs = stmt.executeQuery();
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            
+            
+            if(rs.next()){
+                int id = id_fat;
+                int id_conta = rs.getInt(1);
+                String data = rs.getObject(2).toString();
+                int quantParcela = rs.getInt(3);
+                double juros = rs.getDouble(4);
+                
+                LocalDate dataQuitacao = LocalDate.parse(data, formater);
+                ArrayList <Pagamento> parcelas = new ArrayList<>();
+                        parcelas.addAll(daoPagamento.relatorioPagamento(id));
+                Conta conta = contaDAO.buscarConta(id_conta);
+                
+                
+                fat = new Fatura(conta,dataQuitacao,juros,quantParcela,parcelas,id);
+            }
+            
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar Fatura!\n" + e.getMessage());
+        }
+        
+        
+        
+        
+        return fat;
+    }
+    
     public ArrayList<Fatura> relatorioFatura(int tipo, String str){
         
         ArrayList<Fatura> fat = new ArrayList<>();

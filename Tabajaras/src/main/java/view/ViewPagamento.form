@@ -47,20 +47,30 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="idconta" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="Recebido" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="vencimento" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="nome" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Emdebito" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="totalfatura" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="parcela" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Recebido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Emdebito" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="AtualizarPainelPagamento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="totalfatura" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="parcela" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="148" max="32767" attributes="0"/>
+                              <Component id="PagarParcela" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="148" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -106,6 +116,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Emdebito" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="AtualizarPainelPagamento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -126,7 +140,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="PagarParcela" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -258,12 +272,12 @@
         <Property name="text" type="java.lang.String" value="Total Pago:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="PagarParcela">
       <Properties>
         <Property name="text" type="java.lang.String" value="PAGAR"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PagarParcelaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
@@ -297,6 +311,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="id"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AtualizarPainelPagamento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Refresh"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AtualizarPainelPagamentoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -88,6 +88,7 @@ public class DAOPagamento {
                 String dataP="";
                 if(paga){
                   dataP = rs.getObject(7).toString();                    
+                    
                     try {
                         dataPagamento = LocalDate.parse(dataP, formater);
 

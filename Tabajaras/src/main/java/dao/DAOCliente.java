@@ -263,113 +263,6 @@ import javax.swing.JOptionPane;
                     
                     return -1;
                 }
-
-
-		public PessoaFisica buscarPessoaFisica(String cpf) {
-
-			PessoaFisica pf = new PessoaFisica();
-			String sql = "SELECT * FROM pessoa_fisica WHERE cpf = ? ";
-			ResultSet rs;
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setString(1, cpf);
-				rs = stmt.executeQuery();
-
-				if (rs.next()) {
-
-					pf.setCpf(rs.getString("cpf"));
-					pf.setIdFisica(rs.getInt("id_fisica"));
-
-				}
-
-				try {
-
-					sql = "SELECT nome, limite_de_credito FROM cliente WHERE id_cliente = ?";
-					stmt = conexao.prepareStatement(sql);
-					stmt.setInt(1, pf.getIdFisica());
-
-					rs = stmt.executeQuery();
-
-					if (rs.next()) {
-
-						pf.setNome(rs.getString("nome"));
-						pf.setLimiteDeCredito(rs.getDouble("limite_de_credito"));
-
-					}
-
-				} catch (Exception e) {
-
-					JOptionPane.showMessageDialog(null, "Erro " + e.getMessage());
-
-				}
-
-
-			} catch (Exception e) {
-
-				JOptionPane.showMessageDialog(null, "Erro " + e.getMessage());
-
-			}
-
-			return pf;
-
-		}
-
-		public PessoaJuridica buscarPessoaJuridica(String cnpj) {
-
-			PessoaJuridica pj = new PessoaJuridica();
-			String sql = "SELECT * FROM pessoa_juridica WHERE cnpj = ? ";
-			ResultSet rs;
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setString(1, cnpj);
-				rs = stmt.executeQuery();
-
-				if (rs.next()) {
-
-					pj.setCnpj(rs.getString("cnpj"));
-					pj.setNomeFantasia(rs.getString("nome_fantasia"));
-					pj.setIdJuridica(rs.getInt("juridica_cliente"));
-
-				}
-
-				try {
-
-					sql = "SELECT nome, limite_de_credito FROM cliente WHERE id_cliente = ?";
-					stmt = conexao.prepareStatement(sql);
-					stmt.setInt(1, pj.getIdJuridica());
-
-					rs = stmt.executeQuery();
-
-					if (rs.next()) {
-
-						pj.setNome(rs.getString("nome"));
-						pj.setLimiteDeCredito(rs.getDouble("limite_de_credito"));
-
-					}
-
-				} catch (Exception e) {
-
-					JOptionPane.showMessageDialog(null, "Erro " + e.getMessage());
-
-				}
-
-				
-
-			} catch (Exception e) {
-
-				JOptionPane.showMessageDialog(null, "Erro " + e.getMessage());
-
-			}
-
-			return pj;
-
-		}
                 
                 public ArrayList<Cliente> ArrayClientes() {
                     
@@ -645,54 +538,7 @@ import javax.swing.JOptionPane;
 
 		}
 
-		public Cliente buscarCli(int codigo) {
-
-			int ret = 0;
-			ArrayList<Cliente> clientes = new ArrayList<>();
-
-			clientes.addAll(buscarClientes());
-
-			while (ret > clientes.size()) {
-
-				if (clientes.get(ret) instanceof PessoaFisica) {
-
-					PessoaFisica pf = (PessoaFisica) clientes.get(ret);
-
-					if (pf.getIdFisica() == codigo) {
-
-						return pf;
-
-					} else {
-
-						ret++;
-
-					}
-
-				} else {
-
-					if (clientes.get(ret) instanceof PessoaJuridica) {
-
-						PessoaJuridica pj = (PessoaJuridica) clientes.get(ret);
-
-						if (pj.getIdJuridica() == codigo) {
-
-							return pj;
-
-						} else {
-
-							ret++;
-
-						}
-
-					}
-
-				}
-
-			}
-
-			return null;
-
-		}
+		
 
 		public ArrayList<Endereco> buscarEnd(int codigo) {
 
@@ -734,53 +580,6 @@ import javax.swing.JOptionPane;
 
 		}
 
-		public void alterarEndereco(Endereco e, int codigo) {
-
-			String sql = "UPDATE public.endereco SET logradouro=?, numero=?, "
-					+ "complemento=?, bairro=?, municipio=?, estado=?,  tipo_endereco=?" + " WHERE end_idcliente = ?";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setString(1, e.getLogradouro());
-				stmt.setInt(2, e.getNumero());
-				stmt.setString(3, e.getComplemento());
-				stmt.setString(4, e.getBairro());
-				stmt.setString(5, e.getMunicipio());
-				stmt.setString(6, e.getEstado());
-                                stmt.setString(7, e.getTipo());
-				stmt.setInt(8, codigo);
-				stmt.execute();
-				stmt.close();
-	
-
-			} catch (Exception e2) {
-
-				JOptionPane.showMessageDialog(null, "Erro: " + e2.getMessage());
-				JOptionPane.showMessageDialog(null, "Erro ao cadastrar endereço");
-
-			}
-
-		}
-
-		public void excluirEnderecoDAO(int codigo) {
-
-			String sql = "DELETE FROM endereco WHERE end_idcliente = ?";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, codigo);
-				stmt.execute();
-				stmt.close();
-
-			} catch (Exception e) {
-
-			}
-
-		}
                 
                 public void deletarenderecobyid(int codigo){
                     String sql = "DELETE FROM endereco WHERE id = ?";
@@ -823,64 +622,6 @@ import javax.swing.JOptionPane;
 
 			}
                 }
-
-		public void excluirTodosEnd(int codigo) {
-
-			String sql = "DELETE FROM endereco WHERE end_idcliente = ?";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, codigo);
-				stmt.execute();
-				stmt.close();
-
-			} catch (Exception e) {
-
-			}
-
-		}
-
-		public void excluirFis(int codigo) {
-
-			String sql = "DELETE FROM pessoa_fisica WHERE id_fisica = ?";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, codigo);
-				stmt.execute();
-				stmt.close();
-
-			} catch (Exception e) {
-
-				JOptionPane.showMessageDialog(null, "ERRo excluir fis " + e.getMessage());
-
-			}
-
-		}
-
-		public void excluirJur(int codigo) {
-
-			String sql = "DELETE FROM pessoa_juridica WHERE juridica_cliente = ?";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, codigo);
-				stmt.execute();
-				stmt.close();
-
-			} catch (Exception e) {
-
-				JOptionPane.showMessageDialog(null, "ERRo excluir jur " + e.getMessage());
-
-			}
-
-		}
 
 		public void excluirCli(int codigo) {
 
@@ -977,39 +718,7 @@ import javax.swing.JOptionPane;
 
 		}
 
-		public boolean existeCli() {
-
-			String sql;
-			PreparedStatement ps = null;
-
-			sql = "SELECT * FROM cliente";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				ps = conexao.prepareStatement(sql);
-				ResultSet rs = null;
-
-				rs = ps.executeQuery();
-
-				if (rs.next()) {
-
-					return true;
-
-				}
-
-				ps.close();
-
-			} catch (Exception e) {
-
-				JOptionPane.showMessageDialog(null, "ERRO AO BUSCAR CLIENTE" + e.getMessage());
-
-			}
-
-			return false;
-
-		}
-
+		
 		public int buscarIDCliente() {
 
 			String sql;

@@ -134,6 +134,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         adata = new javax.swing.JTextField();
         nconta = new javax.swing.JLabel();
         ExcluirConta = new javax.swing.JButton();
+        Refresh = new javax.swing.JButton();
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel.getContentPane());
         panel.getContentPane().setLayout(panelLayout);
@@ -166,15 +167,15 @@ public class ViewContaEdicao extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel4.setText("Total Conta:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, 35));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 35));
 
         valor.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         valor.setText("Valor");
-        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, 35));
+        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, -1, 35));
 
         nome.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         nome.setText("cliente");
-        getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
+        getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
         limite.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         limite.setText("Valor");
@@ -182,7 +183,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel6.setText("Vencimento:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 35));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 35));
 
         venc.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         venc.setText("Valor");
@@ -194,7 +195,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel8.setText("Limite de Crédito:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 35));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 35));
 
         jLabel9.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel9.setText("COMPRAS");
@@ -222,7 +223,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel11.setText("Crédito Disponível:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 35));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 35));
 
         limite1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         limite1.setText("Valor");
@@ -282,6 +283,14 @@ public class ViewContaEdicao extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExcluirConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 150, 40));
+
+        Refresh.setText("Refresh");
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -432,6 +441,10 @@ public class ViewContaEdicao extends javax.swing.JFrame {
            
     }//GEN-LAST:event_ExcluirContaActionPerformed
 
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RefreshActionPerformed
+
     
     
 
@@ -441,6 +454,7 @@ public class ViewContaEdicao extends javax.swing.JFrame {
     private javax.swing.JButton BTDetalharCompra;
     private javax.swing.JButton ExcluirCompra;
     private javax.swing.JButton ExcluirConta;
+    private javax.swing.JButton Refresh;
     private javax.swing.JTextField adata;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combo;

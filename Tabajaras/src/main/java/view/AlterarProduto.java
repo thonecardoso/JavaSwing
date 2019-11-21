@@ -12,6 +12,7 @@ public class AlterarProduto extends javax.swing.JFrame {
     public AlterarProduto() {
         initComponents();
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

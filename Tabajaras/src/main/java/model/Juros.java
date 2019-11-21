@@ -16,9 +16,11 @@ public class Juros {
             
             int dias = (int) DAYS.between(LocalDate.now(), dataVencimento);
 
+                juros = valor * 2;
             
-
-                juros = valor * 2 + dias * 0.033;
+                for(int i=0; i<dias; i++){
+                    juros *=  0.033;
+                }
 
                 juros = juros / 100.0;
 
