@@ -88,15 +88,16 @@ public class GerenciadorConta {
                                             str=str+"\n\n";
                                             str=str+"Produtos";
                                             str=str+"\n\n";
+                                                str=str+"Nº_";
+                                            str=str+"__Produto__";
+                                            str=str+"Pais de Origem__";
+                                            str=str+"Preço__";
                                                 for(int k=0;k<c.getProd().size();k++){
                                                     Produto pr = c.getProd().get(k);
-                                                    str=str+"Nº->> "+(k+1);
-                                                    str=str+"\n";
-                                                    str=str+"Produto->> "+pr.getNome();
-                                                    str=str+"\n";
-                                                    str=str+"Pais de Origem->> "+pr.getPaisDeOrigem();
-                                                    str=str+"\n";
-                                                    str=str+"Preço->> "+nf.format(pr.getPreco());
+                                                    str=str+(k+1);
+                                                    str=str+pr.getNome();
+                                                    str=str+pr.getPaisDeOrigem();
+                                                    str=str+nf.format(pr.getPreco());
                                                     str=str+"\n";
                                                 }
                                             str=str+"\n\n";    
@@ -162,17 +163,19 @@ public class GerenciadorConta {
                                             
                                             str=str+"Data da Compra->> "+c.getData().format(form);
                                             str=str+"\n\n";
-                                            str=str+"Produtos";
+                                            str=str+"--==]Produtos[==--";
                                             str=str+"\n\n";
+                                            
+                                            str=str+"Nº_";
+                                            str=str+"__Produto__";
+                                            str=str+"Pais de Origem__";
+                                            str=str+"Preço__";
                                                 for(int k=0;k<c.getProd().size();k++){
                                                     Produto pr = c.getProd().get(k);
-                                                    str=str+"Nº->> "+(k+1);
-                                                    str=str+"\n";
-                                                    str=str+"Produto->> "+pr.getNome();
-                                                    str=str+"\n";
-                                                    str=str+"Pais de Origem->> "+pr.getPaisDeOrigem();
-                                                    str=str+"\n";
-                                                    str=str+"Preço->> "+nf.format(pr.getPreco());
+                                                    str=str+(k+1);
+                                                    str=str+pr.getNome();
+                                                    str=str+pr.getPaisDeOrigem();
+                                                    str=str+nf.format(pr.getPreco());
                                                     str=str+"\n";
                                                 }
                                             str=str+"\n\n";    
@@ -189,25 +192,6 @@ public class GerenciadorConta {
                         return str;   
 	}
 
-	
-	private Cliente buscarCliente(String cod) {
-
-		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i) instanceof PessoaFisica) {
-				PessoaFisica pf = (PessoaFisica) clientes.get(i);
-				if (pf.getCpf().equals(cod)) {
-					return clientes.get(i);
-				}
-			} else {
-				PessoaJuridica pj = (PessoaJuridica) clientes.get(i);
-				if (pj.getCnpj().equals(cod)) {
-					return clientes.get(i);
-				}
-			}
-		}
-
-		return null;
-	}
 
 	
 			

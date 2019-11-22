@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 		private PreparedStatement stmt;
 		private Connection conexao;
+                private DAOEndereco enderecoDAO = new DAOEndereco();
 
 		public void cadastroClienteFisica(PessoaFisica pf) {
 
@@ -35,14 +36,14 @@ import javax.swing.JOptionPane;
 				sql = "INSERT INTO pessoa_fisica (cpf,id_fisica) VALUES (?,?)";
 
 				try {
-
+                                        int id = buscarIDCliente();
 					stmt = conexao.prepareStatement(sql);
 					stmt.setString(1, pf.getCpf());
-					stmt.setInt(2, buscarIDCliente());
+					stmt.setInt(2, id);
 					stmt.execute();
 					stmt.close();
 
-					cadastrarEndereco(pf.getEndereco());
+					enderecoDAO.cadastrarEndereco(pf.getEndereco(),id);
 
 				} catch (Exception e) {
 
@@ -69,20 +70,21 @@ import javax.swing.JOptionPane;
 				stmt.setDouble(2, pj.getLimiteDeCredito());
 				stmt.setInt(3, 2);
 				stmt.execute();
-				stmt.close();
+				
 
 				sql = "INSERT INTO pessoa_juridica (nome_fantasia,cnpj," + "juridica_cliente) VALUES (?,?,?)";
 
 				try {
-
+                                        int id = buscarIDCliente();
 					stmt = conexao.prepareStatement(sql);
 					stmt.setString(1, pj.getNomeFantasia());
 					stmt.setString(2, pj.getCnpj());
-					stmt.setInt(3, buscarIDCliente());
+					stmt.setInt(3, id);
 					stmt.execute();
-					stmt.close();
+					
+                                        
 
-					cadastrarEndereco(pj.getEndereco());
+					enderecoDAO.cadastrarEndereco(pj.getEndereco(),id);
 
 				} catch (Exception e) {
 
@@ -94,83 +96,9 @@ import javax.swing.JOptionPane;
 
 		}
 
-		public void cadastrarEndereco(ArrayList<Endereco> end) {
+		
 
-			String sql ="INSERT INTO public.endereco(\n" +
-"	logradouro, numero, complemento, bairro, municipio, estado, end_idcliente, tipo_endereco)\n" +
-"	VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
-                                
-                                /*"INSERT INTO endereco ("
-                                + "logradouro,"
-                                + "numero,"
-                                + "complemento,"
-                                + "bairro,"
-				+ "municipio,"
-                                + "estado,"
-                                + "end_idcliente,) VALUES (?,?,?,?,?,?,?)";*/
-
-			for (Endereco e : end) {
-
-				try {
-
-					conexao=SingletonCon.getConexao();
-					stmt = conexao.prepareStatement(sql);
-					stmt.setString(1, e.getLogradouro());
-					stmt.setInt(2, e.getNumero());
-					stmt.setString(3, e.getComplemento());
-					stmt.setString(4, e.getBairro());
-					stmt.setString(5, e.getMunicipio());
-					stmt.setString(6, e.getEstado());
-					stmt.setInt(7, buscarIDCliente());
-                                        stmt.setString(8, e.getTipo());
-					stmt.execute();
-					stmt.close();
-
-				} catch (Exception e2) {
-
-					JOptionPane.showMessageDialog(null, "Erro: " + e2.getMessage());
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar endereço");
-
-				}
-
-			}
-
-		}
-
-		public void adicionarEndereco(Endereco e, int codigo) {
-
-			//String sql = "INSERT INTO endereco (logradouro,numero,complemento,bairro,"
-			//		+ "municipio,estado,end_idcliente) VALUES (?,?,?,?,?,?,?)";
-                        
-                        String sql ="INSERT INTO public.endereco(\n" +
-                        "logradouro, numero, complemento, bairro, municipio, estado, end_idcliente,  tipo_endereco)\n" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setString(1, e.getLogradouro());
-				stmt.setInt(2, e.getNumero());
-				stmt.setString(3, e.getComplemento());
-				stmt.setString(4, e.getBairro());
-				stmt.setString(5, e.getMunicipio());
-				stmt.setString(6, e.getEstado());
-				stmt.setInt(7, codigo);
-                                stmt.setString(8, e.getTipo());
-				stmt.execute();
-				stmt.close();
-
-			} catch (Exception e2) {
-
-				JOptionPane.showMessageDialog(null, "Erro: " + e2.getMessage());
-				JOptionPane.showMessageDialog(null, "Erro ao cadastrar endereço");
-
-			}
-
-		}
-                
-                public int validarCPF(String cpf) {
+		public int validarCPF(String cpf) {
 
 			String sql = "SELECT * FROM pessoa_fisica WHERE cpf = ? ";
 
@@ -291,28 +219,30 @@ import javax.swing.JOptionPane;
                                     cnpj=rs.getString("cnpj");
                                     nome_fantasia=rs.getString("nome_fantasia");
                                     
+                                    
+                                    
                                     if(tipo==1){
                                         PessoaFisica pf = new PessoaFisica();
                                         pf.setCpf(cpf);
-                                        pf.setEndereco(buscarEnd(cod));                                        
                                         pf.setId(cod);
                                         pf.setTipo(tipo);
                                         pf.setNome(nome);
                                         pf.setLimiteDeCredito(credito);
                                         pf.setIdFisica(cod);
+                                        pf.setEndereco(enderecoDAO.buscarEnd(cod));
                                         
                                         clientes.add(pf);
                                         
                                     }else if(tipo==2){
                                         PessoaJuridica pj = new PessoaJuridica();
                                         pj.setCnpj(cnpj);
-                                        pj.setEndereco(buscarEnd(cod));
                                         pj.setId(cod);                                        
                                         pj.setTipo(tipo);
                                         pj.setNome(nome);
                                         pj.setLimiteDeCredito(credito);
                                         pj.setIdJuridica(cod);
                                         pj.setNomeFantasia(nome_fantasia);
+                                        pj.setEndereco(enderecoDAO.buscarEnd(cod));
                                         
                                         clientes.add(pj);
                                     }
@@ -356,15 +286,17 @@ import javax.swing.JOptionPane;
                                     cnpj=rs.getString("cnpj");
                                     nome_fantasia=rs.getString("nome_fantasia");
                                     
+                                    
                                     pf = new PessoaFisica();
                                     
                                     pf.setCpf(cpf);
-                                    pf.setEndereco(buscarEnd(cod));
                                     pf.setId(cod);
                                     pf.setTipo(tipo);
                                     pf.setNome(nome);
                                     pf.setLimiteDeCredito(credito);
                                     pf.setIdFisica(cod);
+                                    pf.setEndereco(enderecoDAO.buscarEnd(cod));
+                                    
 
                                    
                                 }
@@ -409,13 +341,13 @@ import javax.swing.JOptionPane;
                                     pj = new PessoaJuridica();
                                     
                                     pj.setCnpj(cnpj);
-                                    pj.setEndereco(buscarEnd(cod));
                                     pj.setId(cod);                                        
                                     pj.setTipo(tipo);
                                     pj.setNome(nome);
                                     pj.setLimiteDeCredito(credito);
                                     pj.setIdJuridica(cod);
                                     pj.setNomeFantasia(nome_fantasia);
+                                    pj.setEndereco(enderecoDAO.buscarEnd(cod));
                                         
                                        
                                 }
@@ -430,198 +362,81 @@ import javax.swing.JOptionPane;
                                 
                 }
                 
-		public ArrayList<Cliente> buscarClientes() {
-
-			ArrayList<Cliente> clientes = new ArrayList<>();
-			Cliente cli = new Cliente();
-			ResultSet rs;
-
-			String sql = "SELECT * FROM cliente";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				rs = stmt.executeQuery();
-
-				while (rs.next()) {
-
-					cli.setNome(rs.getString("nome"));
-					cli.setLimiteDeCredito(rs.getDouble("limite_de_credito"));
-					cli.setId(rs.getInt("id_cliente"));
-                                       
-					cli.setTipo(rs.getInt("tipo"));
-
-					if (cli.getTipo() == 1) {
-
-						PessoaFisica pf = new PessoaFisica();
-
-						pf.setNome(cli.getNome());
-						pf.setLimiteDeCredito(cli.getLimiteDeCredito());
-						pf.setId(cli.getId());
-                                                
-
-						sql = "SELECT * FROM pessoa_fisica WHERE id_fisica = ? ";
-
-						try {
-
-							conexao=SingletonCon.getConexao();
-							stmt = conexao.prepareStatement(sql);
-							stmt.setInt(1, pf.getId());
-							ResultSet resultSet = stmt.executeQuery();
-
-							if (resultSet.next()) {
-
-								pf.setCpf(resultSet.getString("cpf"));
-								pf.setIdFisica(resultSet.getInt("id_fisica"));
-
-							}
-
-						} catch (Exception e) {
-
-							JOptionPane.showMessageDialog(null, "Erro no segundo try " + e.getMessage());
-
-						}
-
-						pf.setEndereco(buscarEnd(pf.getId()));
-
-						clientes.add(pf);
-
-					} else if (cli.getTipo() == 2) {
-
-						PessoaJuridica pj = new PessoaJuridica();
-
-						pj.setNome(cli.getNome());
-						pj.setLimiteDeCredito(cli.getLimiteDeCredito());
-						pj.setIdJuridica(cli.getId());
-                                                
-
-						sql = "SELECT * FROM pessoa_juridica WHERE juridica_cliente = ? ";
-
-						try {
-
-							conexao=SingletonCon.getConexao();
-							stmt = conexao.prepareStatement(sql);
-							stmt.setInt(1, pj.getIdJuridica());
-							ResultSet resultSet = stmt.executeQuery();
-
-							if (resultSet.next()) {
-
-								pj.setCnpj(resultSet.getString("cnpj"));
-								pj.setNomeFantasia(resultSet.getString("nome_fantasia"));
-								pj.setIdJuridica(resultSet.getInt("juridica_cliente"));
-
-							}
-
-						} catch (Exception e) {
-
-							JOptionPane.showMessageDialog(null, "Erro no segundo try " + e.getMessage());
-
-						}
-
-						pj.setEndereco(buscarEnd(pj.getIdJuridica()));
-
-						clientes.add(pj);
-
-					}
-
-				}
-
-
-			} catch (Exception e) {
-
-				JOptionPane.showMessageDialog(null, "Erro no primeiro try " + e.getMessage());
-
-			}
-
-			return clientes;
-
-		}
-
-		
-
-		public ArrayList<Endereco> buscarEnd(int codigo) {
-
-			ArrayList<Endereco> end = new ArrayList<>();
-
-			String sql = "SELECT * FROM endereco WHERE end_idcliente = ? ";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, codigo);
-				ResultSet rs = null;
-
-				rs = stmt.executeQuery();
-
-				while (rs.next()) {
-
-					Endereco e = new Endereco();
-
-					e.setLogradouro(rs.getString("logradouro"));
-					e.setNumero(rs.getInt("numero"));
-					e.setComplemento(rs.getString("complemento"));
-					e.setBairro(rs.getString("bairro"));
-					e.setMunicipio(rs.getString("municipio"));
-					e.setEstado(rs.getString("estado"));
-					e.setId(rs.getInt("end_idcliente"));
-                                        e.setTipo(rs.getString("tipo_endereco"));
-                                        e.setIdend(rs.getInt("id"));
-					end.add(e);
-
-				}
-
-			} catch (Exception e) {
-
-			}
-
-			return end;
-
-		}
-
-                
-                public void deletarenderecobyid(int codigo){
-                    String sql = "DELETE FROM endereco WHERE id = ?";
-
-			try {
-
-				conexao=SingletonCon.getConexao();
-				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, codigo);
-				stmt.execute();
-				stmt.close();
-
-			} catch (Exception e) {
-
-			}
-                }
-                
-                public void alterarend(Endereco e){
-                    String sql = "UPDATE public.endereco\n" +
-                    "SET logradouro=?, numero=?, complemento=?, bairro=?, municipio=?, estado=?, tipo_endereco=?\n" +
-                    "WHERE id=?;";
+                public Cliente ClienteById(int id) {
                     
+                        int cod, tipo;
+                        String nome, cpf, cnpj, nome_fantasia;
+                        double credito;
+                        
+                        
+			ResultSet rs;
+                        PessoaJuridica pj = null;
+                        PessoaFisica pf = null;
+
+			String sql = "SELECT nome, credito, tipo, cnpj, nome_fantasia, cpf FROM  clientes WHERE cod=?";
                         try {
 
 				conexao=SingletonCon.getConexao();
 				stmt = conexao.prepareStatement(sql);
-                                stmt.setString(1, e.getLogradouro());
-				stmt.setInt(2, e.getNumero());
-				stmt.setString(3, e.getComplemento());
-				stmt.setString(4, e.getBairro());
-				stmt.setString(5, e.getMunicipio());
-				stmt.setString(6, e.getEstado());
-                                stmt.setString(7, e.getTipo());
-				stmt.setInt(8, e.getIdend());
-				stmt.execute();
-				stmt.close();
+                                stmt.setInt(1, id);
+				rs = stmt.executeQuery();
+                                
+                                if(rs.next()){
+                                    cod=id;
+                                    nome=rs.getString("nome");
+                                    credito=rs.getDouble("credito");
+                                    tipo=rs.getInt("tipo");                                    
+                                    cpf=rs.getString("cpf");
+                                    cnpj=rs.getString("cnpj");
+                                    nome_fantasia=rs.getString("nome_fantasia");
+                                    
+                                    if(tipo == 1){
+                                        
+                                        pf = new PessoaFisica();
+                                    
+                                        pf.setCpf(cpf);
+                                        pf.setId(cod);
+                                        pf.setTipo(tipo);
+                                        pf.setNome(nome);
+                                        pf.setLimiteDeCredito(credito);
+                                        pf.setIdFisica(cod);
+                                        pf.setEndereco(enderecoDAO.buscarEnd(cod));
+                                        
+                                        return pf;
 
-			} catch (Exception en) {
-                            JOptionPane.showMessageDialog(null, "Erro" + en.getMessage());
+                                        
+                                    }else{
+                                        
+                                        pj = new PessoaJuridica();
+
+                                        pj.setCnpj(cnpj);
+                                        pj.setId(cod);                                        
+                                        pj.setTipo(tipo);
+                                        pj.setNome(nome);
+                                        pj.setLimiteDeCredito(credito);
+                                        pj.setIdJuridica(cod);
+                                        pj.setNomeFantasia(nome_fantasia);
+                                        pj.setEndereco(enderecoDAO.buscarEnd(cod));
+                                        
+                                        
+                                        return pj;
+                                    }
+                                    
+                                        
+                                       
+                                }
+                                    
+                        } catch (Exception e) {
+
+				JOptionPane.showMessageDialog(null, "Erro ao buscar cliente" + e.getMessage());
 
 			}
+
+			return null;
+                                
                 }
+                
+                
 
 		public void excluirCli(int codigo) {
 

@@ -22,7 +22,7 @@ public class GerenciadorCliente {
 
 		    ArrayList<Cliente> clientes = new ArrayList<>();
             
-		    clientes.addAll(cd.buscarClientes());
+		    clientes.addAll(cd.ArrayClientes());
                     
                     String str= "";
 		    
@@ -36,8 +36,10 @@ public class GerenciadorCliente {
 
 					PessoaFisica pf = (PessoaFisica) cl;
 					str = str + "NOME: " + pf.getNome();
-                                        str = str + "\n";
+                                        str = str + "  ";
 					str = str + "CPF: " + pf.getCpf();
+                                        str = str + "  ";
+                                        str = str + "ID: " + pf.getId();
                                         str = str + "\n";
 					str = str + "LIMITE DE CRÉDITO: " + pf.getLimiteDeCredito();
                                         str = str + "\n";
@@ -70,8 +72,10 @@ public class GerenciadorCliente {
 
 					PessoaJuridica pj = (PessoaJuridica) cl;
 					str = str + "NOME: " + pj.getNome();
-                                        str = str + "\n";
+                                        str = str + "  ";
 					str = str + "CNPJ: " + pj.getCnpj();
+                                        str = str + "  ";
+                                        str = str + "ID: " + pj.getId();
                                         str = str + "\n";
 					str = str + "NOME FANTASIA: " + pj.getNomeFantasia();
                                         str = str + "\n";

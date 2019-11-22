@@ -28,7 +28,7 @@ public class DAOConta {
 
         ArrayList <Conta> contas = new ArrayList<>();
         ArrayList <Compra> compras = new ArrayList<>();
-        ArrayList <Cliente> clientes = new ArrayList<>();
+        
         Cliente cli=null;
             
         try {
@@ -54,11 +54,8 @@ public class DAOConta {
                 dataVencimento = rs.getObject("data_vencimento").toString();
 
                 compras=daocompra.relatorioCompra(idConta);
-                clientes=daocli.ArrayClientes();
-                for(int i=0;i<clientes.size();i++) {
-                    if(clientes.get(i).getId()==idCliente)
-                        cli=clientes.get(i);
-                }
+                
+                cli = daocli.ClienteById(idCliente);
 
                 data = LocalDate.parse(dataVencimento, formater);
 
@@ -79,7 +76,7 @@ public class DAOConta {
 
         ArrayList <Conta> contas = new ArrayList<>();
         ArrayList <Compra> compras = new ArrayList<>();
-        ArrayList <Cliente> clientes = new ArrayList<>();
+        
         Cliente cli=null;
             
         try {
@@ -131,11 +128,7 @@ public class DAOConta {
                 dataVencimento = rs.getObject("data_vencimento").toString();
 
                 compras=daocompra.relatorioCompra(idConta);
-                clientes=daocli.ArrayClientes();
-                for(int i=0;i<clientes.size();i++) {
-                    if(clientes.get(i).getId()==idCliente)
-                        cli=clientes.get(i);
-                }
+                cli = daocli.ClienteById(idCliente);
 
                 data = LocalDate.parse(dataVencimento, formater);
 
@@ -159,7 +152,7 @@ public class DAOConta {
 
         ArrayList <Conta> contas = new ArrayList<>();
         ArrayList <Compra> compras = new ArrayList<>();
-        ArrayList <Cliente> clientes = new ArrayList<>();
+        
         Cliente cli=null;
             
         try {
@@ -216,11 +209,8 @@ public class DAOConta {
                 dataVencimento = rs.getObject("data_vencimento").toString();
 
                 compras=daocompra.relatorioCompra(idConta);
-                clientes=daocli.ArrayClientes();
-                for(int i=0;i<clientes.size();i++) {
-                    if(clientes.get(i).getId()==idCliente)
-                        cli=clientes.get(i);
-                }
+                
+                cli = daocli.ClienteById(idCliente);
 
                 data = LocalDate.parse(dataVencimento, formater);
 
@@ -244,7 +234,7 @@ public class DAOConta {
 
         ArrayList <Conta> contas = new ArrayList<>();
         ArrayList <Compra> compras = new ArrayList<>();
-        ArrayList <Cliente> clientes = new ArrayList<>();
+        
         Cliente cli=null;
         try {
             conexao=SingletonCon.getConexao();
@@ -269,11 +259,8 @@ public class DAOConta {
                 dataVencimento = rs.getObject("data_vencimento").toString();
 
                 compras=daocompra.relatorioCompra(idConta);
-                clientes=daocli.ArrayClientes();
-                for(int i=0;i<clientes.size();i++) {
-                    if(clientes.get(i).getId()==idCliente)
-                        cli=clientes.get(i);
-                }
+                
+                cli = daocli.ClienteById(idCliente);
 
                 data = LocalDate.parse(dataVencimento, formater);
 
@@ -296,7 +283,7 @@ public class DAOConta {
 
         ArrayList <Conta> contas = new ArrayList<>();
         ArrayList <Compra> compras = new ArrayList<>();
-        ArrayList <Cliente> clientes = new ArrayList<>();
+        
         Cliente cli=null;
         try {
             conexao=SingletonCon.getConexao();
@@ -320,12 +307,9 @@ public class DAOConta {
                 dataVencimento = rs.getObject("data_vencimento").toString();
 
                 compras=daocompra.relatorioCompra(idConta);
-                clientes=daocli.ArrayClientes();
                 
-                for(int i=0;i<clientes.size();i++) {
-                    if(clientes.get(i).getId()==idCliente)
-                        cli=clientes.get(i);
-                }
+                
+                cli = daocli.ClienteById(idCliente);
 
                 data = LocalDate.parse(dataVencimento, formater);
 
@@ -347,7 +331,7 @@ public class DAOConta {
 
         
         ArrayList <Compra> compras = new ArrayList<>();
-        ArrayList <Cliente> clientes = new ArrayList<>();
+        
         Conta conta = null;
         Cliente cli=null;
         try {
@@ -373,12 +357,8 @@ public class DAOConta {
                 dataVencimento = rs.getObject("data_vencimento").toString();
 
                 compras=daocompra.relatorioCompra(idConta);
-                clientes=daocli.ArrayClientes();
-                
-                for(int i=0;i<clientes.size();i++) {
-                    if(clientes.get(i).getId()==idCliente)
-                        cli=clientes.get(i);
-                }
+                                
+                cli = daocli.ClienteById(idCliente);
 
                 data = LocalDate.parse(dataVencimento, formater);
 

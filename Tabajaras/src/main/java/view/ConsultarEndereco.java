@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Endereco;
 import dao.DAOCliente;
+import dao.DAOEndereco;
 
 public class ConsultarEndereco extends javax.swing.JFrame {
     
@@ -11,12 +12,13 @@ public class ConsultarEndereco extends javax.swing.JFrame {
     int totalend;
     int posicao;
     DAOCliente dc;
+    DAOEndereco endDAO = new DAOEndereco();
 
     public ConsultarEndereco() {
         initComponents();
         posicao =0;
         dc = new DAOCliente();
-        
+        endDAO = new DAOEndereco();
         
         endereco = new ArrayList<>();
     }
@@ -215,7 +217,7 @@ public class ConsultarEndereco extends javax.swing.JFrame {
             int j=JOptionPane.showConfirmDialog(null, "Corfirma a Exclusão desse Endereço?");
             if(j==0){
                totalend--;
-               dc.deletarenderecobyid(endereco.get(posicao).getIdend());
+               endDAO.deletarenderecobyid(endereco.get(posicao).getIdend());
                endereco.remove(posicao);
                JOptionPane.showMessageDialog(null, "Endereço Excluído com Sucesso!");
                carregacomp(0);
@@ -238,7 +240,7 @@ public class ConsultarEndereco extends javax.swing.JFrame {
                 en.setEstado(estado.getText().trim());
                 en.setTipo(tipo.getText().trim());
                
-               dc.alterarend(en);
+               endDAO.alterarend(en);
                
                JOptionPane.showMessageDialog(null, "Endereço Alterado com Sucesso!");
                
