@@ -564,6 +564,88 @@ import javax.swing.JOptionPane;
 			return codigo - 1;
 
 		}
+                
+                public ArrayList<Cliente> ClientesTabela(int tip, String str) {
+                    
+                        int cod, tipo;
+                        String nome, cpf, cnpj, nome_fantasia;
+                        double credito;
+                        
+                        ArrayList<Cliente> clientes = new ArrayList<>();
+			ResultSet rs;
+                        
+                        String sql;
+                        
+                        if(tip == 1){
+                            sql = "SELECT cod, nome, credito, tipo, cpf, cnpj, nome_fantasia " +
+                                         "FROM public.clientes "
+                                    + "where nome like ? and tipo = 1 ;";                            
+                        }else if(tip == 2){
+                            sql = "SELECT cod, nome, credito, tipo, cpf, cnpj, nome_fantasia " +
+                                         "FROM public.clientes "
+                                    + "where nome like ? and tipo = 2 ;";
+                        }else{
+                            sql = "SELECT cod, nome, credito, tipo, cpf, cnpj, nome_fantasia " +
+                                         "FROM public.clientes "
+                                    + "where nome like ? ;";
+                        }
+                        
+                        
+                        
+                        try {
+
+				conexao=SingletonCon.getConexao();
+				stmt = conexao.prepareStatement(sql);
+                                stmt.setString(1, str);
+				rs = stmt.executeQuery();
+                                int i=1;
+				while (rs.next()) {
+                                    
+                                    cod=rs.getInt("cod");
+                                    nome=rs.getString("nome");
+                                    credito=rs.getDouble("credito");
+                                    tipo=rs.getInt("tipo");                                    
+                                    cpf=rs.getString("cpf");
+                                    cnpj=rs.getString("cnpj");
+                                    nome_fantasia=rs.getString("nome_fantasia");
+                                    
+                                    
+                                    
+                                    if(tipo==1){
+                                        PessoaFisica pf = new PessoaFisica();
+                                        pf.setCpf(cpf);
+                                        pf.setId(cod);
+                                        pf.setTipo(tipo);
+                                        pf.setNome(nome);
+                                        pf.setLimiteDeCredito(credito);
+                                        pf.setIdFisica(cod);
+                                        pf.setEndereco(enderecoDAO.buscarEnd(cod));
+                                        
+                                        clientes.add(pf);
+                                        
+                                    }else if(tipo==2){
+                                        PessoaJuridica pj = new PessoaJuridica();
+                                        pj.setCnpj(cnpj);
+                                        pj.setId(cod);                                        
+                                        pj.setTipo(tipo);
+                                        pj.setNome(nome);
+                                        pj.setLimiteDeCredito(credito);
+                                        pj.setIdJuridica(cod);
+                                        pj.setNomeFantasia(nome_fantasia);
+                                        pj.setEndereco(enderecoDAO.buscarEnd(cod));
+                                        
+                                        clientes.add(pj);
+                                    }
+                                }
+                        } catch (Exception e) {
+
+				JOptionPane.showMessageDialog(null, "Erro ao buscar clientes" + e.getMessage());
+
+			}
+
+			return clientes;
+                                
+                }
 
 
 }
