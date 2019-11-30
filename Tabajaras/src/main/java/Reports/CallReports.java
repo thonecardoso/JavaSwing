@@ -55,21 +55,20 @@ public class CallReports {
 			
                         String caminho = new File("Reports/" + str + ".jasper").getAbsolutePath();
                         caminho = caminho.replace("Tabajaras/", "Tabajaras/src/main/java/");
-                        System.out.println(caminho);
-                        /*
+                       
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			connection = dao.SingletonCon.getConexao(); 
                         
-			JasperPrint print = JasperFillManager.fillReport(caminho + str + ".jasper", parameters, connection);
+			JasperPrint print = JasperFillManager.fillReport(caminho, parameters, connection);
                         
 			
                         JasperViewer view = new JasperViewer(print, false);
                             view.setVisible(true);
                         
-                        */
+                        
 
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao chamar relatório.", e);
+			                 System.out.println(e.getMessage());
                 }
         
     }
