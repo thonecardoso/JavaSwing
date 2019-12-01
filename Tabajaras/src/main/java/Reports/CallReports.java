@@ -36,10 +36,6 @@ public class CallReports {
             case 4:
                 getReport(strProduto);
                 break;
-                
-            
-            
-            
             
         }
             
@@ -70,6 +66,60 @@ public class CallReports {
 		} catch (Exception e) {
 			                 System.out.println(e.getMessage());
                 }
+        
+    }
+    
+    public JasperViewer getReportJasper(int x){
+        
+        String str;
+        
+        switch (x){
+            
+            case 0:
+                str = strCliente;
+                break;
+            case 1:
+                str = strClienteEndereco;
+                break;
+            case 2:
+                str = strConta;
+                break;
+            case 3:
+                str = strContaCompra;
+                break;
+            case 4:
+                str = strProduto;
+                break;
+            default:
+                return null;
+            
+        }
+        
+        Connection connection = null;
+        
+		try {
+		
+			
+                        String caminho = new File("Reports/" + str + ".jasper").getAbsolutePath();
+                        caminho = caminho.replace("Tabajaras/", "Tabajaras/src/main/java/");
+                       
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			connection = dao.SingletonCon.getConexao(); 
+                        
+			JasperPrint print = JasperFillManager.fillReport(caminho, parameters, connection);
+                        
+			
+                        JasperViewer view = new JasperViewer(print, false);
+                            
+                        return view;
+                        
+                        
+
+		} catch (Exception e) {
+			                 System.out.println(e.getMessage());
+                }
+                
+                return null;
         
     }
 

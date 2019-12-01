@@ -44,6 +44,7 @@ public class DAOPagamento {
                 stmt.setInt(5, p.getId_fatura());
                 stmt.execute();
                 
+               
                 
             }
             catch(Exception e) {                
@@ -131,6 +132,25 @@ public class DAOPagamento {
             
             stmt = conexao.prepareStatement(SQL);
             stmt.setInt(1, id);
+            stmt.execute();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir pagamento!" + e);
+        }
+    }
+    
+    public void AtualizarJuros(int id, double juros){
+        
+        try {
+            conexao = SingletonCon.getConexao();
+                                
+            String SQL =    "UPDATE pagamento SET juros = ? " +
+                            "WHERE id = ?;";
+                        
+            
+            stmt = conexao.prepareStatement(SQL);
+            stmt.setDouble(1, juros);
+            stmt.setInt(2, id);
             stmt.execute();
             
         } catch (Exception e) {

@@ -1,11 +1,14 @@
 package model;
 
+import dao.DAOPagamento;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Juros {
     
-    
+    DAOPagamento pagamentoDAO = new DAOPagamento();
     
     public double calculaJurosAtraso(double valor,LocalDate dataVencimento,
             int tipPagamento){
@@ -15,14 +18,21 @@ public class Juros {
         if(dataVencimento.isBefore(LocalDate.now())){
             
             int dias = (int) DAYS.between(LocalDate.now(), dataVencimento);
-
-                juros = valor * 2;
+            
+            if(dias<0){
+                dias*=-1;
+            }
+                
+                juros = valor * 1.02;
             
                 for(int i=0; i<dias; i++){
-                    juros *=  0.033;
+                    juros = (juros + valor) * 1.0033;
+                 
                 }
+                
+            
 
-                juros = juros / 100.0;
+                juros = juros/100.0;
 
             
             
@@ -134,6 +144,28 @@ public class Juros {
         juros = juros + this.calculaJurosAtraso(valor, dataVencimento, 1);
         
         return juros;
+    }
+    
+    public void jurosFatura(ArrayList<Pagamento> pag){
+        Pagamento parcela;
+        Iterator it = pag.iterator();
+        while(it.hasNext()){
+            parcela = (Pagamento) it.next();
+            if(!parcela.isPaga()){
+                if(parcela.getDataVencimento().isBefore(LocalDate.now())){
+                    double juros;
+                    juros = calculaJurosAtraso(parcela.getValor(),parcela.getDataVencimento(),1);
+                    if(juros > 0){
+                        parcela.setJuros(juros);
+                        pagamentoDAO.AtualizarJuros(parcela.getId(), juros);
+                        System.out.println("atualizando juros");
+                    }    
+                }
+            }
+        }
+        
+        
+    
     }
     
 }

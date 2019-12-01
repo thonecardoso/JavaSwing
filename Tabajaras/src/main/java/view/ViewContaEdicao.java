@@ -111,30 +111,37 @@ public class ViewContaEdicao extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         panel = new javax.swing.JFrame();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        valor = new javax.swing.JLabel();
-        nome = new javax.swing.JLabel();
-        limite = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        venc = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        AlterarVencimento = new javax.swing.JButton();
-        ExcluirCompra = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        nconta = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        nome = new javax.swing.JLabel();
+        limite = new javax.swing.JLabel();
         limite1 = new javax.swing.JLabel();
-        BTDetalharCompra = new javax.swing.JButton();
+        venc = new javax.swing.JLabel();
+        valor = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
         combo = new javax.swing.JComboBox<>();
         cpf = new javax.swing.JTextField();
         AlterarCliente = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         adata = new javax.swing.JTextField();
-        nconta = new javax.swing.JLabel();
+        AlterarVencimento = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        BTDetalharCompra = new javax.swing.JButton();
+        ExcluirCompra = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         ExcluirConta = new javax.swing.JButton();
         Refresh = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel.getContentPane());
         panel.getContentPane().setLayout(panelLayout);
@@ -150,6 +157,101 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel9.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel9.setText("COMPRAS");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, 35));
+
+        jLabel10.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel10.setText("RESUMO CONTA:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, 35));
+
+        nconta.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 24)); // NOI18N
+        nconta.setText("nconta");
+        getContentPane().add(nconta, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        nome.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        nome.setText("cliente");
+
+        limite.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        limite.setText("Valor");
+
+        limite1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        limite1.setText("Valor");
+
+        venc.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        venc.setText("Valor");
+
+        valor.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        valor.setText("Valor");
+
+        jLabel7.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel7.setText("Nome Cliente:");
+
+        jLabel8.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel8.setText("Limite de Crédito:");
+
+        jLabel11.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel11.setText("Crédito Disponível:");
+
+        jLabel6.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel6.setText("Vencimento:");
+
+        jLabel4.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+        jLabel4.setText("Total Conta:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(valor)
+                    .addComponent(venc)
+                    .addComponent(limite1)
+                    .addComponent(limite)
+                    .addComponent(nome))
+                .addContainerGap(267, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nome)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limite)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limite1)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(venc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 590, 220));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -163,79 +265,26 @@ public class ViewContaEdicao extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 289, 531, 300));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-        jLabel4.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel4.setText("Total Conta:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 35));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 590, 290));
 
-        valor.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        valor.setText("Valor");
-        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, -1, 35));
-
-        nome.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        nome.setText("cliente");
-        getContentPane().add(nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
-
-        limite.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        limite.setText("Valor");
-        getContentPane().add(limite, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel6.setText("Vencimento:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 35));
-
-        venc.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        venc.setText("Valor");
-        getContentPane().add(venc, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, 35));
-
-        jLabel7.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel7.setText("Nome Cliente:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 35));
-
-        jLabel8.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel8.setText("Limite de Crédito:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 35));
-
-        jLabel9.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel9.setText("COMPRAS");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, 35));
-
-        jLabel10.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel10.setText("RESUMO CONTA:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 12, -1, 35));
-
-        AlterarVencimento.setText("Alterar Vencimento");
-        AlterarVencimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarVencimentoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(AlterarVencimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 155, -1));
-
-        ExcluirCompra.setText("Excluir Compra");
-        ExcluirCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExcluirCompraActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ExcluirCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, 163, -1));
-
-        jLabel11.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        jLabel11.setText("Crédito Disponível:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 35));
-
-        limite1.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
-        limite1.setText("Valor");
-        getContentPane().add(limite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
-
-        BTDetalharCompra.setText("Detalhar Compra");
-        BTDetalharCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTDetalharCompraActionPerformed(evt);
-            }
-        });
-        getContentPane().add(BTDetalharCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, 163, -1));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pessoa Física", "Pessoa Juridica" }));
         combo.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +292,6 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 comboActionPerformed(evt);
             }
         });
-        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, -1));
 
         cpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cpf.setText("CPF");
@@ -253,7 +301,6 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 cpfMouseClicked(evt);
             }
         });
-        getContentPane().add(cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 155, -1));
 
         AlterarCliente.setText("Alterar Cliente");
         AlterarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +308,37 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 AlterarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(AlterarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 155, 45));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(AlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 190, 220));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         adata.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         adata.setText("dd/MM/yyyy");
@@ -270,11 +347,79 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 adataMouseClicked(evt);
             }
         });
-        getContentPane().add(adata, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 160, -1));
 
-        nconta.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 24)); // NOI18N
-        nconta.setText("nconta");
-        getContentPane().add(nconta, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+        AlterarVencimento.setText("Alterar Vencimento");
+        AlterarVencimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlterarVencimentoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(AlterarVencimento, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(adata, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(adata, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AlterarVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 190, 110));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        BTDetalharCompra.setText("Detalhar Compra");
+        BTDetalharCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTDetalharCompraActionPerformed(evt);
+            }
+        });
+
+        ExcluirCompra.setText("Excluir Compra");
+        ExcluirCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirCompraActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(BTDetalharCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ExcluirCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BTDetalharCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ExcluirCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, 190, 90));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         ExcluirConta.setText("Excluir Conta");
         ExcluirConta.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +427,6 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 ExcluirContaActionPerformed(evt);
             }
         });
-        getContentPane().add(ExcluirConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 150, 40));
 
         Refresh.setText("Refresh");
         Refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +434,42 @@ public class ViewContaEdicao extends javax.swing.JFrame {
                 RefreshActionPerformed(evt);
             }
         });
-        getContentPane().add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 150, 40));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ExcluirConta, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ExcluirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 490, 190, 100));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 520, 40, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -466,6 +645,13 @@ public class ViewContaEdicao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel limite;
     private javax.swing.JLabel limite1;

@@ -71,7 +71,6 @@ public class ViewFatura extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         novafatura = new javax.swing.JButton();
-        pagamento = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -92,13 +91,6 @@ public class ViewFatura extends javax.swing.JFrame {
         novafatura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novafaturaActionPerformed(evt);
-            }
-        });
-
-        pagamento.setText("Pagamento");
-        pagamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pagamentoActionPerformed(evt);
             }
         });
 
@@ -167,16 +159,12 @@ public class ViewFatura extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(novafatura)
-                        .addGap(30, 30, 30)
-                        .addComponent(AtualizarViewFatura))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1)
-                        .addGap(36, 36, 36)
-                        .addComponent(pagamento)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(label1)
+                .addGap(28, 28, 28)
+                .addComponent(novafatura)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AtualizarViewFatura, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -189,21 +177,19 @@ public class ViewFatura extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(novafatura)
-                    .addComponent(AtualizarViewFatura))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label1)
-                    .addComponent(pagamento))
-                .addGap(78, 78, 78)
+                .addContainerGap(109, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AtualizarViewFatura)
+                        .addComponent(novafatura))
+                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(combbuscatabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -239,10 +225,6 @@ public class ViewFatura extends javax.swing.JFrame {
         faturas = faturaDAO.relatorioFatura(combbuscatabela.getSelectedIndex(), str);
         preencherTabela(faturas);
     }//GEN-LAST:event_filtroKeyTyped
-
-    private void pagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagamentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pagamentoActionPerformed
 
     private void novafaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novafaturaActionPerformed
         ViewNovaFatura vnf = new ViewNovaFatura();
@@ -301,7 +283,6 @@ public class ViewFatura extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel label1;
     private javax.swing.JButton novafatura;
-    private javax.swing.JButton pagamento;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
