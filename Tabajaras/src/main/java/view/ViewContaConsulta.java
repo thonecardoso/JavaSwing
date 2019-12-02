@@ -19,7 +19,7 @@ public class ViewContaConsulta extends javax.swing.JFrame {
     private DAOCliente clienteDAO = new DAOCliente ();
     
     private DAOConta contaDAO = new DAOConta();
-    private RelatorioConta_1 rc1;
+    
     
     private DefaultTableModel modelo = null;
     
@@ -257,18 +257,7 @@ public class ViewContaConsulta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         
-        /*int x;
-        try {
-            x = Integer.parseInt(id_conta.getText().trim());
-            //ArrayList<Conta> contas1 = contaDAO.getConta(x);
-            RelatorioConta_1 rc2 = new RelatorioConta_1(contaDAO.getConta(x)); 
-
-
-            rc2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-            rc2.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }*/
+        
         id_conta.setText("ID CONTA");
     }//GEN-LAST:event_Busca_ID_CONTAActionPerformed
 
@@ -311,40 +300,7 @@ public class ViewContaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_RefreshActionPerformed
 
     
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewContaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewContaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewContaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewContaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewContaConsulta().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Busca_ID_CONTA;

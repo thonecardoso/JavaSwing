@@ -197,6 +197,11 @@ public class Principal extends javax.swing.JFrame {
         menuFatura.setText("Fatura");
 
         TelaPrincipalFatura.setText("Menu Fatura");
+        TelaPrincipalFatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TelaPrincipalFaturaActionPerformed(evt);
+            }
+        });
         menuFatura.add(TelaPrincipalFatura);
 
         GerarFatura.setText("Gerar Fatura");
@@ -267,6 +272,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu5.add(RelatorioProdutos);
 
         RelatorioFatura.setText("Fatura");
+        RelatorioFatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RelatorioFaturaActionPerformed(evt);
+            }
+        });
         jMenu5.add(RelatorioFatura);
 
         jMenuBar1.add(jMenu5);
@@ -515,6 +525,31 @@ public class Principal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void TelaPrincipalFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelaPrincipalFaturaActionPerformed
+        JInternalFrame[] frames = desktop.getAllFrames();
+        for(JInternalFrame f : frames) {
+            f.dispose();
+        }
+        ViewFatura janelaViewFatura = new ViewFatura();
+        JInternalFrame internoconsult = new JInternalFrame();
+        internoconsult.setContentPane(janelaViewFatura.getContentPane());
+        internoconsult.setMaximizable(true);
+        internoconsult.setClosable(true);
+        internoconsult.pack();
+        internoconsult.setVisible(true);
+        desktop.add(internoconsult);
+        
+    }//GEN-LAST:event_TelaPrincipalFaturaActionPerformed
+
+    private void RelatorioFaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioFaturaActionPerformed
+        JInternalFrame[] frames = desktop.getAllFrames();
+        for(JInternalFrame f : frames) {
+            f.dispose();
+        }
+        CallReports janelaCallReports = new CallReports();   
+        janelaCallReports.Call(5);
+    }//GEN-LAST:event_RelatorioFaturaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

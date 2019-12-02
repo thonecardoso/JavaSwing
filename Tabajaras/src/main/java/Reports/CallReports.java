@@ -17,6 +17,7 @@ public class CallReports {
     String strConta = "Contas";
     String strContaCompra = "ContaComCompras";
     String strProduto = "Produtos";
+    String strFatura = "Fatura";
     
     public void Call(int x){
         switch (x){
@@ -35,6 +36,9 @@ public class CallReports {
                 break;
             case 4:
                 getReport(strProduto);
+                break;
+            case 5:
+                getReport(strFatura);
                 break;
             
         }
@@ -89,6 +93,9 @@ public class CallReports {
                 break;
             case 4:
                 str = strProduto;
+                break;
+            case 5:
+                str = strFatura;
                 break;
             default:
                 return null;

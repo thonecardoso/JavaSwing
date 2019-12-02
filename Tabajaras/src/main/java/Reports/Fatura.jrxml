@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fatura" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[select f.id_fatura, data_quitacao, quantidade_parcelas as qtparcelas, f.juros, id_conta,total,id_cli,
+nome, p.id as id_pag, p.data_vencimento as venc_pag, p.valor as valor_pag, 
+p.juros as juros_pag, p.paga, p.data_pagamento as data_pagfat
+from fatura f
+join contas on id_conta_fatura = id_conta
+join pagamento p on p.id_fatura = f.id_fatura
+order by f.id_fatura,p.id asc;]]>
+	</queryString>
+	<field name="id_fatura" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_fatura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fatura"/>
+	</field>
+	<field name="data_quitacao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_quitacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fatura"/>
+	</field>
+	<field name="qtparcelas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="qtparcelas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fatura"/>
+	</field>
+	<field name="id_conta" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_conta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contas"/>
+	</field>
+	<field name="juros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="juros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fatura"/>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contas"/>
+	</field>
+	<field name="id_cli" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_cli"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contas"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contas"/>
+	</field>
+	<field name="id_pag" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_pag"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pagamento"/>
+	</field>
+	<field name="venc_pag" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="venc_pag"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pagamento"/>
+	</field>
+	<field name="valor_pag" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="valor_pag"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pagamento"/>
+	</field>
+	<field name="juros_pag" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="juros_pag"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pagamento"/>
+	</field>
+	<field name="paga" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="paga"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pagamento"/>
+	</field>
+	<field name="data_pagfat" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_pagfat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pagamento"/>
+	</field>
+	<variable name="valor_pag1" class="java.lang.Double" resetType="Group" resetGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_pag}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{id_fatura}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF" uuid="df26104b-a7fc-458f-8a21-50b13c7c7736"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343" uuid="369745f3-8095-4b8b-8b7a-38e42b7aef67"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement style="SubTitle" x="68" y="0" width="192" height="24" forecolor="#736343" uuid="ef0a10c7-2940-4ac1-a69e-db1a00ae6f2e"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["COD Fatura: " + $F{id_fatura}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{data_quitacao}]]></groupExpression>
+		<groupHeader>
+			<band height="82">
+				<staticText>
+					<reportElement x="0" y="-6" width="79" height="50" uuid="db068869-a612-4dae-b80c-7106fb9a5dab"/>
+					<textElement textAlignment="Justified" verticalAlignment="Bottom">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Cód cliente:
+Cód conta  :
+Total conta :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="79" y="0" width="90" height="30" uuid="1035ffe6-adfb-44b9-baa5-fba8f6c7e667"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{id_cli}+"\n"+$F{id_conta}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="79" y="30" width="90" height="14" uuid="b25c3c24-e45e-40cd-bed5-e15828bb9290"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="193" y="0" width="120" height="30" uuid="f6f65884-95fc-42fc-b941-a1589600ec09"/>
+					<textElement verticalAlignment="Bottom">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome Cliente       :
+Previsão Quitação:
+
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="193" y="30" width="256" height="14" uuid="8de69a79-702a-4fe2-8a7a-57d821ac24d2"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Juros vencimento conta + parcelamento:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="313" y="-1" width="100" height="16" uuid="8016d518-db9e-4de1-b1c4-7ae955f24e4c"/>
+					<textElement verticalAlignment="Bottom">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<textField pattern="d &apos;de&apos; MMMM &apos;de&apos; yyyy">
+					<reportElement x="313" y="15" width="236" height="16" uuid="5c52acc3-b2de-4c67-8c08-94eea5316b37"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{data_quitacao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="449" y="30" width="100" height="14" uuid="f625ae83-40ca-4694-867f-a5018b123e00"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juros}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-3" y="50" width="45" height="24" uuid="924b251d-326c-4471-b537-fd8c9fd8e695"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Dialog" size="14"/>
+					</textElement>
+					<text><![CDATA[Id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="42" y="50" width="103" height="24" uuid="98dae138-d524-417c-8dde-ab15b6396b51"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Dialog" size="14"/>
+					</textElement>
+					<text><![CDATA[Vencimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="145" y="50" width="85" height="24" uuid="0784e321-5e88-45b5-8ba5-d4bae7cda488"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Dialog" size="14"/>
+					</textElement>
+					<text><![CDATA[Valor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="230" y="50" width="85" height="24" uuid="accd80ec-9bac-4dfc-bf56-8abc3af2890a"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Dialog" size="14"/>
+					</textElement>
+					<text><![CDATA[Juros]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="50" width="138" height="24" uuid="2b2d564e-2189-465d-b393-7d448229f8f7"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Dialog" size="14"/>
+					</textElement>
+					<text><![CDATA[Status Pagamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="453" y="50" width="99" height="24" uuid="3d810638-f62d-49a6-aada-49c4947730ae"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Dialog" size="14"/>
+					</textElement>
+					<text><![CDATA[Data Pagamento]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="-20" y="50" width="595" height="1" backcolor="#000000" uuid="2e1bb90b-aba6-4999-9028-4ac8e0346d5d"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="qtparcelas">
+		<groupExpression><![CDATA[$F{qtparcelas}]]></groupExpression>
+	</group>
+	<group name="juros">
+		<groupExpression><![CDATA[$F{juros}]]></groupExpression>
+	</group>
+	<group name="id_conta">
+		<groupExpression><![CDATA[$F{id_conta}]]></groupExpression>
+	</group>
+	<group name="total">
+		<groupExpression><![CDATA[$F{total}]]></groupExpression>
+	</group>
+	<group name="id_cli">
+		<groupExpression><![CDATA[$F{id_cli}]]></groupExpression>
+	</group>
+	<group name="nome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="123" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="170" y="0" width="263" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<text><![CDATA[Faturas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="184" y="62" width="276" height="48" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
+				<textElement>
+					<font fontName="Dialog"/>
+				</textElement>
+				<text><![CDATA[Relatório Faturas com parcelas
+Loja TAVV]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="-20" width="140" height="140" uuid="095e1a50-39a7-4ccf-8960-e26d047f61b7"/>
+				<imageExpression><![CDATA["/home/thone/Downloads/taça.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="460" y="0" width="100" height="120" uuid="a3ad330b-86f2-4740-85f4-7efa95f5eeed"/>
+				<imageExpression><![CDATA["/home/thone/Downloads/uvawine.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="1a61a836-d137-48b1-ad67-6ff64600bf93"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="a98495d8-3c8d-4fa0-81f5-30c3efc2f766"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="42" height="15" uuid="7c0afd81-8947-4054-80ea-24931c3c17cb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ce01866c-fe8f-4b81-aa1d-7ea0b7b1311b"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{id_pag}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement style="Detail" x="42" y="0" width="103" height="15" uuid="0145c061-9291-4415-9181-bc71e2ede945">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8bf26473-a155-4e03-bde1-e20e49b59f07"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{venc_pag}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement style="Detail" x="145" y="0" width="85" height="15" uuid="c2a32fb9-af78-4355-a814-3ba0a5cfa66c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe0cec05-7de5-4a47-92c7-834f1fe6c036"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{valor_pag}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement style="Detail" x="230" y="0" width="85" height="15" uuid="1171d5b2-5c18-4489-93e9-0a46fe442968">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6d08fd82-f95c-49d4-8923-7f489b8079e6"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{juros_pag}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="315" y="0" width="138" height="15" uuid="36a5d595-02e9-436f-9dd9-31a6a216506a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4315efcb-433d-40ae-b8bc-e26328d0eb2d"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{paga}==false?"Aberta":"Paga"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement style="Detail" x="453" y="0" width="102" height="15" uuid="c830ec79-a956-49ad-8934-748602de336c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8e17433e-c736-438a-9d21-5ad70af4af43"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{paga}==true?$F{data_pagfat}:"-"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fa45a887-615a-4d84-a2d7-8a2219671b3c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="183682bc-d976-4756-83e0-6625a3f98ed1"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="0193f9b3-1559-491a-8580-b6988863b6a1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

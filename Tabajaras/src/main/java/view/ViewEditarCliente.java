@@ -26,16 +26,6 @@ public class ViewEditarCliente extends javax.swing.JFrame {
         CarregarComponentes();
         
         
-        
-        
-       
-        
-        
-        
-       
-        
-        
-        
     }
 
     @SuppressWarnings("unchecked")

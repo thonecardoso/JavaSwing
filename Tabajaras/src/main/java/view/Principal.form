@@ -163,6 +163,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Menu Fatura"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TelaPrincipalFaturaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="GerarFatura">
               <Properties>
@@ -243,6 +246,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fatura"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RelatorioFaturaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
