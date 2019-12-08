@@ -17,17 +17,13 @@
           <artifactId>postgresql</artifactId>
           <version>9.1-901-1.jdbc4</version>
       </dependency>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
-        </dependency>
-        <dependency>
+       
+       <!-- <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>6.8.0</version>
         </dependency>
-
+-->
          
     </dependencies>
     <name>TabajarasGit</name>
