@@ -12,12 +12,12 @@ public class SingletonCon {
 				Class.forName("org.postgresql.Driver");
 
 				Properties prop = new Properties();
-				prop.put("user","postgres");
+				prop.put("user","tcardoso");
 				prop.put("password", "123456");
 				prop.put("charset", "UTF-8");
 				prop.put("lc_ctype", "ISO8859_1");
 
-				conexao=DriverManager.getConnection("jdbc:postgresql://localhost:5432/tabajara", prop);
+				conexao=DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", prop);
                         }
                         
 			return conexao;
